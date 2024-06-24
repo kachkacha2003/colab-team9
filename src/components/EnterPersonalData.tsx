@@ -15,16 +15,34 @@ export default function EnterPersonalData() {
             <input
               type="text"
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
-              className="w-full px-4 py-[14px] mt-2 border outline-none"
+              className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
             <p className="font-medium mt-3">თანამდებობა</p>
             <input
               type="text"
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
-              className="w-full px-4 py-[14px] mt-2 border outline-none"
+              className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
+            <div className="mt-5 flex justify-between">
+              <div className="">
+                <p className="font-medium">დაწყების რიცხვი</p>
+                <input
+                  type="date"
+                  placeholder="mm / dd / yyyy"
+                  className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+                ></input>
+              </div>
+              <div className="">
+                <p className="font-medium">დამთავრების რიცხვი</p>
+                <input
+                  type="date"
+                  placeholder="mm / dd / yyyy"
+                  className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+                ></input>
+              </div>
+            </div>
           </form>
         </div>
       </div>
