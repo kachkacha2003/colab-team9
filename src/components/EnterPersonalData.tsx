@@ -19,6 +19,15 @@ export default function EnterPersonalData() {
             />
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
           </form>
+          <form className="mt-3">
+            <p className="font-medium">თანამდებობა</p>
+            <input
+              type="text"
+              placeholder="დეველოპერი, დიზაინერი, ა.შ."
+              className="w-full px-4 py-[14px] mt-2 border outline-none"
+            />
+            <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
+          </form>
         </div>
       </div>
     </div>
