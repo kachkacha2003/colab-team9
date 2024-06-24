@@ -1,7 +1,7 @@
 import React from "react";
 
-function BackButton(props) {
+function BackButtonArrow(props) {
   return <div></div>;
 }
 
-export default BackButton;
+export default BackButtonArrow;

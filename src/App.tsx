@@ -1,14 +1,16 @@
-import { useState } from "react";
-import BackButton from "./buttons/BackButtonArrow";
-import PrivateInfo from "./component/PrivateInfo";
-import NextButton from "./buttons/NextButton";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Content from "./component/Content";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "privateInfo",
+      element: <Content />,
+    },
+  ]);
   return (
     <div>
-      <BackButton />
-      <PrivateInfo />
-      <NextButton />
+      <RouterProvider router={router} />
     </div>
   );
 }
