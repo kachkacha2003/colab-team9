@@ -1,11 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Content from "./component/Content";
+import PrivateInfo from "./component/PrivateInfo";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "privateInfo",
-      element: <Content />,
+      element: <PrivateInfo />,
     },
   ]);
   return (
