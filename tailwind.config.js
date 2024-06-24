@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         mediumRed: "#F93B1D",
+        mediumGray: "#C1C1C1",
       },
     },
   },

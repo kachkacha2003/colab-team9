@@ -10,7 +10,7 @@ export default function EnterPersonalData() {
             <span className="text-2xl	font-bold">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</span>
             <span className="text-xl">2/3</span>
           </div>
-          <form className="mt-[70px]">
+          <form className="mt-[70px] border-b border-mediumGray pb-12">
             <p className="font-medium">თანამდებობა</p>
             <input
               type="text"
@@ -43,7 +43,15 @@ export default function EnterPersonalData() {
                 ></input>
               </div>
             </div>
+            <div className="w-full mt-5">
+              <p className="font-medium">აღწერა</p>
+              <textarea
+                placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
+                className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded"
+              ></textarea>
+            </div>
           </form>
+          <div className="">vhtbhkjmk,l</div>
         </div>
       </div>
     </div>
