@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 export default function EnterPersonalData() {
   return (
     <div className="bg-gray-100">
@@ -51,7 +53,16 @@ export default function EnterPersonalData() {
               ></textarea>
             </div>
           </form>
-          <div className="">vhtbhkjmk,l</div>
+          <div className="">
+            <div className="p-4">
+              <Button
+                variant="secondary"
+                onClick={() => console.log("Clicked!")}
+              >
+                ჩვეულებრივი ღილაკი
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

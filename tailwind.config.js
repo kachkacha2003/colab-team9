@@ -6,6 +6,7 @@ export default {
       colors: {
         mediumRed: "#F93B1D",
         mediumGray: "#C1C1C1",
+        lightBlue: "#62A1EB",
       },
     },
   },
