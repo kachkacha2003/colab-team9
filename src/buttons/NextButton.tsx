@@ -1,7 +1,7 @@
 import React from "react";
 
 function NextButton(props) {
-  return <div></div>;
+  return <button>შემდეგი</button>;
 }
 
 export default NextButton;
