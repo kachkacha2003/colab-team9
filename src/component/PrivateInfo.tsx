@@ -63,10 +63,10 @@ function PrivateInfo() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex text-off-black leading-5 w-[822px]"
+      className="flex text-off-black leading-5 w-[1100px]"
     >
-      <BackButtonArrow />
-      <div className="ml-[126px]  h-screen">
+      <BackButtonArrow location={"/"} />
+      <div className="ml-[126px]  h-screen relative ">
         <div className="flex justify-between mt-12 border-b border-off-black w-[800px]">
           <h1 className="font-bold text-2xl ">პირადი ინფო</h1>
           <span className="text-xl font-normal ">1/3</span>
@@ -118,7 +118,6 @@ function PrivateInfo() {
           <label htmlFor="aboutme" className="font-normal">
             ჩემ შესახებ (არასავალდებულო)
           </label>
-          {/* w-[798px] h-[103px] */}
           <textarea
             placeholder="ზოგადი ინფო შენ შესახებ"
             className=" min-w-[300px]  min-h-[50px] max-w-[798px] max-h-[103px] h-[103px] text-top px-4 pt-[13px] border-[1px] border-off-grey rounded mt-2 resize"
@@ -160,7 +159,7 @@ function PrivateInfo() {
             </span>
           )}
         </div>
-        <NextButton />
+        <NextButton location={"/experience"} />
       </div>
 
       <div className="">

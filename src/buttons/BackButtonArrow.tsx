@@ -1,9 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function BackButtonArrow() {
+type TLocation = {
+  location: string;
+};
+
+function BackButtonArrow({ location }: TLocation) {
   return (
     <div>
-      <button className="w-10">
+      <Link to={location} className="w-10">
         <svg
           className="absolute top-11 left-12"
           width="40"
@@ -18,7 +23,7 @@ function BackButtonArrow() {
             fill="#2E2E2E"
           />
         </svg>
-      </button>
+      </Link>
     </div>
   );
 }
