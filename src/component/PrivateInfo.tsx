@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import NextButton from "../buttons/NextButton";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Profile from "./Profile";
 import BackButtonArrow from "../buttons/BackButtonArrow";
+import accept from "/public/images/accept.svg";
 
 const regexLetters = /^[\u10A0-\u10FF]+$/;
 const regexMail = /@redberry\.ge$/;
 const regexTel = /^\+995(5\d{8}|\d{9})$/;
 
 function PrivateInfo() {
+  const [count, setCount] = useState<number>(0);
+
   const schema = yup.object({
     name: yup
       .string()
@@ -43,16 +46,16 @@ function PrivateInfo() {
         (value) => regexTel.test(value)
       ),
   });
+
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   const name = watch("name");
   const lastName = watch("lastName");
@@ -60,6 +63,14 @@ function PrivateInfo() {
   const aboutme = watch("aboutme");
   const email = watch("email");
   const phone = watch("phone");
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const file: File = files[0];
+    const imageUrl: string = URL.createObjectURL(file);
+    setValue("files", imageUrl);
+    console.log(imageUrl);
+    console.log(data);
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -76,7 +87,13 @@ function PrivateInfo() {
             <label htmlFor="name">სახელი</label>
             <input
               placeholder="ანზორ"
-              className="border-[1px] border-off-grey rounded w-[371px] h-12 pl-4 my-2"
+              className={`:focus outline-none border-[1px]  rounded w-[371px] h-12 pl-4 my-2 ${
+                count === 1
+                  ? errors.name
+                    ? "border-[#EF5050]"
+                    : "border-[#98E37E]"
+                  : "border-off-grey"
+              }`}
               type="text"
               id="name"
               {...register("name")}
@@ -89,13 +106,23 @@ function PrivateInfo() {
           </div>
           <div className="flex flex-col ml-14">
             <label htmlFor="lastName">გვარი</label>
-            <input
-              placeholder="მუმლაძე"
-              className="border-[1px] border-off-grey rounded w-[371px] h-12 pl-4 my-2 "
-              type="text"
-              id="lastName"
-              {...register("lastName")}
-            ></input>
+            <div
+              className={`border-[1px] border-off-grey rounded w-[371px] h-12 pl-4 my-2  ${
+                count === 1
+                  ? errors.name
+                    ? "border-[#EF5050]"
+                    : "border-[#98E37E]"
+                  : "border-off-grey"
+              } flex justify-between `}
+            >
+              <input
+                placeholder="მუმლაძე"
+                type="text"
+                id="lastName"
+                {...register("lastName")}
+              ></input>
+              <img src={accept} className="pr-[14px]" />
+            </div>
             {errors.lastName && (
               <span className="font-light text-[14px] text-[#2E2E2E]">
                 {errors.lastName.message}
@@ -103,16 +130,18 @@ function PrivateInfo() {
             )}
           </div>
         </div>
-        <div className="mt-14">
-          <label className="text-lg" htmlFor="files">
-            პირადი ფოტოს ატვირთვა
-          </label>
+        <div className="mt-14 flex ">
+          <label className="text-lg">პირადი ფოტოს ატვირთვა</label>
           <input
-            className="ml-4 bg-[#0E80BF]"
+            className="ml-4 hidden"
             type="file"
             id="files"
             {...register("files")}
           ></input>
+
+          <div className="ml-[19px] bg-[#0E80BF] w-[107px] h-[27px] flex justify-center items-center rounded text-white ">
+            <label htmlFor="files">ატვირთვა</label>
+          </div>
         </div>
         <div className="mt-14 flex flex-col ">
           <label htmlFor="aboutme" className="font-normal">
@@ -142,7 +171,7 @@ function PrivateInfo() {
             </span>
           )}
         </div>
-        <div className="mt-[29px]">
+        <div className="mt-[29px] flex flex-col">
           <label className="font-medium" htmlFor="phone">
             მობილურის ნომერი
           </label>
@@ -159,19 +188,16 @@ function PrivateInfo() {
             </span>
           )}
         </div>
-        <NextButton location={"/experience"} />
+        <NextButton setCount={setCount} />
       </div>
-
-      <div className="">
-        <Profile
-          name={name}
-          lastName={lastName}
-          files={files}
-          aboutme={aboutme}
-          email={email}
-          phone={phone}
-        />
-      </div>
+      <Profile
+        name={name}
+        lastName={lastName}
+        files={files}
+        aboutme={aboutme}
+        email={email}
+        phone={phone}
+      />
     </form>
   );
 }
