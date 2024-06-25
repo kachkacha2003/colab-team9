@@ -1,7 +1,25 @@
 import Button from "./Button";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type formType = {
+  position: string;
+  employer: string;
+  startNumber: number;
+  endNumber: number;
+  description: string;
+};
 
 export default function EnterPersonalData() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formType>();
+
+  const onSubmit: SubmitHandler<formType> = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="bg-gray-100">
       <div className="flex pl-12 pt-12 pr-32 ">
@@ -25,26 +43,38 @@ export default function EnterPersonalData() {
             <span className="text-2xl	font-bold">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</span>
             <span className="text-xl">2/3</span>
           </div>
-          <form className="mt-[70px] border-b border-mediumGray pb-12">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-[70px] border-b border-mediumGray pb-12"
+          >
             <p className="font-medium">თანამდებობა</p>
             <input
               type="text"
+              {...register("position", { required: true })}
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
+            {errors.position ? (
+              <p className="text-red-500">სავალდებულო ველი</p>
+            ) : null}
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
             <p className="font-medium mt-3">დამსაქმებელი</p>
             <input
               type="text"
+              {...register("employer", { required: true })}
               placeholder="დამსაქმებელი"
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
+            {errors.employer ? (
+              <p className="text-red-500">სავალდებულო ველი</p>
+            ) : null}
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
             <div className="mt-5 flex justify-between">
               <div className="">
                 <p className="font-medium">დაწყების რიცხვი</p>
                 <input
                   type="date"
+                  {...register("startNumber")}
                   placeholder="mm / dd / yyyy"
                   className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
                 ></input>
@@ -53,6 +83,7 @@ export default function EnterPersonalData() {
                 <p className="font-medium">დამთავრების რიცხვი</p>
                 <input
                   type="date"
+                  {...register("endNumber")}
                   placeholder="mm / dd / yyyy"
                   className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
                 ></input>
@@ -62,36 +93,35 @@ export default function EnterPersonalData() {
               <p className="font-medium">აღწერა</p>
               <textarea
                 placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
+                {...register("description")}
                 className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
               ></textarea>
             </div>
-          </form>
-          <div className="">
             <div className="mt-10">
               <Button
+                type="button"
                 variant="secondary"
                 onClick={() => console.log("Clicked!")}
               >
                 მეტი გამოცდილების დამატება
               </Button>
             </div>
-            <div className="mt-[115px] flex justify-between pb-[65px]">
-              <Button
-                variant="outline"
-                size="large"
-                onClick={() => console.log("Clicked!")}
-              >
-                ᲣᲙᲐᲜ
-              </Button>
-              <Button
-                variant="outline"
-                size="large"
-                onClick={() => console.log("Clicked!")}
-              >
-                ᲨᲔᲛᲓᲔᲒᲘ
-              </Button>
+            <div className="">
+              <div className="mt-[115px] flex justify-between pb-[65px]">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="large"
+                  onClick={() => console.log("Clicked!")}
+                >
+                  ᲣᲙᲐᲜ
+                </Button>
+                <Button variant="outline" size="large">
+                  ᲨᲔᲛᲓᲔᲒᲘ
+                </Button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
