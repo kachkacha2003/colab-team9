@@ -1,6 +1,6 @@
 export default function PersonalData() {
   return (
-    <div className="flex p-5 border-b ml-20">
+    <div className="flex p-5 ml-20">
       <div className="">
         <div className="text-mediumRed text-[34px] font-bold">
           <span className="">ანზორ</span>

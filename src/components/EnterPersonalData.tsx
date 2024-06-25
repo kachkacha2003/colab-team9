@@ -5,7 +5,19 @@ export default function EnterPersonalData() {
     <div className="bg-gray-100">
       <div className="flex pl-12 pt-12 pr-32 ">
         <div className="">
-          <img src="/images/lefterrow.png" alt="" />
+          <Button
+            variant="primary"
+            size="medium"
+            isRound
+            onClick={() => console.log("Clicked!")}
+            className="p-2"
+          >
+            <img
+              src="/images/lefterrow.png"
+              alt=""
+              className="w-full h-full object-contain"
+            />
+          </Button>
         </div>
         <div className="ml-16 w-[798px]">
           <div className=" flex justify-between border-b border-black">
@@ -49,17 +61,33 @@ export default function EnterPersonalData() {
               <p className="font-medium">აღწერა</p>
               <textarea
                 placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
-                className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded"
+                className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
               ></textarea>
             </div>
           </form>
           <div className="">
-            <div className="p-4">
+            <div className="mt-10">
               <Button
                 variant="secondary"
                 onClick={() => console.log("Clicked!")}
               >
-                ჩვეულებრივი ღილაკი
+                მეტი გამოცდილების დამატება
+              </Button>
+            </div>
+            <div className="mt-[115px] flex justify-between pb-[65px]">
+              <Button
+                variant="outline"
+                size="large"
+                onClick={() => console.log("Clicked!")}
+              >
+                ᲣᲙᲐᲜ
+              </Button>
+              <Button
+                variant="outline"
+                size="large"
+                onClick={() => console.log("Clicked!")}
+              >
+                ᲨᲔᲛᲓᲔᲒᲘ
               </Button>
             </div>
           </div>
