@@ -1,4 +1,5 @@
 import Button from "./Button";
+import { useForm } from "react-hook-form";
 
 export default function EnterPersonalData() {
   return (
@@ -32,10 +33,10 @@ export default function EnterPersonalData() {
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
-            <p className="font-medium mt-3">თანამდებობა</p>
+            <p className="font-medium mt-3">დამსაქმებელი</p>
             <input
               type="text"
-              placeholder="დეველოპერი, დიზაინერი, ა.შ."
+              placeholder="დამსაქმებელი"
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
