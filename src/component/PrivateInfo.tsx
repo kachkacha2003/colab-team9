@@ -14,14 +14,14 @@ function PrivateInfo() {
   const schema = yup.object({
     name: yup
       .string()
-      .required("მინიმუმ 2 ასო, ქართული ასოები")
+      .required("სახელი ცარიელი ვერ იქნება")
       .min(2, "მინიმუმ 2 ასო, ქართული ასოები")
       .test("შეცდომა-სახელი", "მინიმუმ 2 ასო, ქართული ასოები", (value) =>
         regexLetters.test(value)
       ),
     lastName: yup
       .string()
-      .required("მინიმუმ 2 ასო, ქართული ასოები")
+      .required("გვარი ცარიელი ვერ იქნება")
       .min(2, "მინიმუმ 2 ასო, ქართული ასოები")
       .test("შეცდომა-გვარი", "მინიმუმ 2 ასო, ქართული ასოები", (value) =>
         regexLetters.test(value)
@@ -30,13 +30,13 @@ function PrivateInfo() {
     aboutme: yup.string(),
     email: yup
       .string()
-      .required()
+      .required("ელ-ფოსტა ცარიელი ვერ იქნება")
       .test("შეცდომა-ფოსტა", "უნდა მთავრდებოდეს @redberry.ge-ით", (value) =>
         regexMail.test(value)
       ),
     phone: yup
       .string()
-      .required()
+      .required("ტელეფონის ნომერი ცარიელი ვერ იქნება")
       .test(
         "შეცდომა-ტელეფონი",
         "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს",
@@ -63,15 +63,15 @@ function PrivateInfo() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex text-off-black leading-5"
+      className="flex text-off-black leading-5 w-[822px]"
     >
       <BackButtonArrow />
-      <div className="ml-[126px] w-1/2 h-screen">
-        <div className="flex justify-between mt-12 border-b border-off-black">
+      <div className="ml-[126px]  h-screen">
+        <div className="flex justify-between mt-12 border-b border-off-black w-[800px]">
           <h1 className="font-bold text-2xl ">პირადი ინფო</h1>
           <span className="text-xl font-normal ">1/3</span>
         </div>
-        <div className="mt-20 font-medium flex  ">
+        <div className="mt-[77px] font-medium flex  ">
           <div className="flex flex-col">
             <label htmlFor="name">სახელი</label>
             <input
@@ -81,9 +81,13 @@ function PrivateInfo() {
               id="name"
               {...register("name")}
             ></input>
-            {errors.name && <span>{errors.name.message}</span>}
+            {errors.name && (
+              <span className="font-light text-[14px] text-[#2E2E2E]">
+                {errors.name.message}
+              </span>
+            )}
           </div>
-          <div className="flex flex-col ml-12">
+          <div className="flex flex-col ml-14">
             <label htmlFor="lastName">გვარი</label>
             <input
               placeholder="მუმლაძე"
@@ -92,25 +96,74 @@ function PrivateInfo() {
               id="lastName"
               {...register("lastName")}
             ></input>
-            {errors.lastName && <span>{errors.lastName.message}</span>}
+            {errors.lastName && (
+              <span className="font-light text-[14px] text-[#2E2E2E]">
+                {errors.lastName.message}
+              </span>
+            )}
           </div>
         </div>
-        <div>
-          <label htmlFor="files">პირადი ინფოს ატვირთვა</label>
-          <input type="file" id="files" {...register("files")}></input>
+        <div className="mt-14">
+          <label className="text-lg" htmlFor="files">
+            პირადი ფოტოს ატვირთვა
+          </label>
+          <input
+            className="ml-4 bg-[#0E80BF]"
+            type="file"
+            id="files"
+            {...register("files")}
+          ></input>
         </div>
-        <label htmlFor="aboutme">ჩემ შესახებ (არასავალდებულო)</label>
-        <input type="text" id="aboutme" {...register("aboutme")}></input>
-        <label htmlFor="mail">ელ.ფოსტა</label>
-        <input type="email" id="mail" {...register("email")}></input>
-        {errors.email && <span>{errors.email.message}</span>}
-        <label htmlFor="phone">მობილურის ნომერი</label>
-        <input type="tel" id="phone" {...register("phone")}></input>
-        {errors.phone && <span>{errors.phone.message}</span>}
+        <div className="mt-14 flex flex-col ">
+          <label htmlFor="aboutme" className="font-normal">
+            ჩემ შესახებ (არასავალდებულო)
+          </label>
+          {/* w-[798px] h-[103px] */}
+          <textarea
+            placeholder="ზოგადი ინფო შენ შესახებ"
+            className=" min-w-[300px]  min-h-[50px] max-w-[798px] max-h-[103px] h-[103px] text-top px-4 pt-[13px] border-[1px] border-off-grey rounded mt-2 resize"
+            id="aboutme"
+            {...register("aboutme")}
+          ></textarea>
+        </div>
+        <div className="mt-[33px] flex flex-col ">
+          <label className="font-medium" htmlFor="mail">
+            ელ.ფოსტა
+          </label>
+          <input
+            className="h-12 w-[798px] pl-4 my-2 border-[1px] border-off-grey rounded"
+            placeholder="anzorr666@redberry.ge"
+            type="email"
+            id="mail"
+            {...register("email")}
+          ></input>
+          {errors.email && (
+            <span className="font-light text-[14px] text-[#2E2E2E]">
+              {errors.email.message}
+            </span>
+          )}
+        </div>
+        <div className="mt-[29px]">
+          <label className="font-medium" htmlFor="phone">
+            მობილურის ნომერი
+          </label>
+          <input
+            className="h-12 w-[798px] pl-4 my-2 border-[1px] border-off-grey rounded "
+            placeholder="+995 551 12 34 56"
+            type="tel"
+            id="phone"
+            {...register("phone")}
+          ></input>
+          {errors.phone && (
+            <span className="font-light text-[14px] text-[#2E2E2E]">
+              {errors.phone.message}
+            </span>
+          )}
+        </div>
         <NextButton />
       </div>
 
-      <div className="w-1/2">
+      <div className="">
         <Profile
           name={name}
           lastName={lastName}
