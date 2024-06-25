@@ -3,19 +3,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import NextButton from "../buttons/NextButton";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Profile from "./Profile";
 
 const regexLetters = /^[\u10A0-\u10FF]+$/;
 const regexMail = /@redberry\.ge$/;
 const regexTel = /^\+995(5\d{8}|\d{9})$/;
-
-type Inputs = {
-  name: string;
-  lastName: string;
-  files: string;
-  aboutme?: string;
-  email: string;
-  phone: string;
-};
 
 function PrivateInfo() {
   const schema = yup.object({
@@ -47,7 +39,7 @@ function PrivateInfo() {
       .test(
         "შეცდომა-ტელეფონი",
         "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს",
-        (value) => regexMail.test(value)
+        (value) => regexTel.test(value)
       ),
   });
   const {
@@ -60,7 +52,13 @@ function PrivateInfo() {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  console.log(errors.name?.message);
+
+  const name = watch("name");
+  const lastName = watch("lastName");
+  const files = watch("files");
+  const aboutme = watch("aboutme");
+  const email = watch("email");
+  const phone = watch("phone");
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>პირადი ინფო</h1>
@@ -82,6 +80,14 @@ function PrivateInfo() {
       <input type="tel" id="phone" {...register("phone")}></input>
       {errors.phone && <span>{errors.phone.message}</span>}
       <NextButton />
+      <Profile
+        name={name}
+        lastName={lastName}
+        files={files}
+        aboutme={aboutme}
+        email={email}
+        phone={phone}
+      />
     </form>
   );
 }
