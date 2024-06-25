@@ -2,7 +2,7 @@ import React from "react";
 
 function Profile({ name, lastName, email, files, aboutme, phone }: Inputs) {
   return (
-    <div>
+    <>
       <h1>
         {name}
         {lastName}
@@ -12,7 +12,7 @@ function Profile({ name, lastName, email, files, aboutme, phone }: Inputs) {
       {aboutme && <h4>ჩემ შესახებ</h4>}
       <p>{aboutme}</p>
       <img src={files} alt="your image" />
-    </div>
+    </>
   );
 }
 
