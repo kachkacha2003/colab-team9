@@ -93,9 +93,12 @@ export default function EnterPersonalData() {
               <p className="font-medium">აღწერა</p>
               <textarea
                 placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
-                {...register("description")}
+                {...register("description", { required: true })}
                 className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
               ></textarea>
+              {errors.description ? (
+                <p className="text-red-500">სავალდებულო ველი</p>
+              ) : null}
             </div>
             <div className="mt-10">
               <Button
