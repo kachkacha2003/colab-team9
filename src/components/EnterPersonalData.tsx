@@ -1,20 +1,32 @@
 import Button from "./Button";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 type formType = {
   position: string;
   employer: string;
-  startNumber: number;
-  endNumber: number;
+  startNumber: Date;
+  endNumber: Date;
   description: string;
 };
+
+const schema = yup.object({
+  position: yup.string().required(),
+  employer: yup.string().required(),
+  startNumber: yup.date().required(),
+  endNumber: yup.date().required(),
+  description: yup.string().required(),
+});
 
 export default function EnterPersonalData() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<formType>();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
@@ -50,23 +62,23 @@ export default function EnterPersonalData() {
             <p className="font-medium">თანამდებობა</p>
             <input
               type="text"
-              {...register("position", { required: true })}
+              {...register("position")}
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
             {errors.position ? (
-              <p className="text-red-500">სავალდებულო ველი</p>
+              <p className="text-red-500">{errors.position.message}</p>
             ) : null}
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
             <p className="font-medium mt-3">დამსაქმებელი</p>
             <input
               type="text"
-              {...register("employer", { required: true })}
+              {...register("employer")}
               placeholder="დამსაქმებელი"
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
             {errors.employer ? (
-              <p className="text-red-500">სავალდებულო ველი</p>
+              <p className="text-red-500">{errors.employer.message}</p>
             ) : null}
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
             <div className="mt-5 flex justify-between">
@@ -74,30 +86,28 @@ export default function EnterPersonalData() {
                 <p className="font-medium">დაწყების რიცხვი</p>
                 <input
                   type="date"
-                  {...register("startNumber")}
+                  {...register("startNumber", { valueAsDate: true })}
                   placeholder="mm / dd / yyyy"
                   className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
-                ></input>
-              </div>
-              <div className="">
-                <p className="font-medium">დამთავრების რიცხვი</p>
+                />
+
                 <input
                   type="date"
-                  {...register("endNumber")}
+                  {...register("endNumber", { valueAsDate: true })}
                   placeholder="mm / dd / yyyy"
                   className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
-                ></input>
+                />
               </div>
             </div>
             <div className="w-full mt-5">
               <p className="font-medium">აღწერა</p>
               <textarea
                 placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
-                {...register("description", { required: true })}
+                {...register("description")}
                 className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
               ></textarea>
               {errors.description ? (
-                <p className="text-red-500">სავალდებულო ველი</p>
+                <p className="text-red-500">{errors.description.message}</p>
               ) : null}
             </div>
             <div className="mt-10">
@@ -119,7 +129,7 @@ export default function EnterPersonalData() {
                 >
                   ᲣᲙᲐᲜ
                 </Button>
-                <Button variant="outline" size="large">
+                <Button variant="outline" size="large" type="submit">
                   ᲨᲔᲛᲓᲔᲒᲘ
                 </Button>
               </div>
