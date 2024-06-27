@@ -12,8 +12,14 @@ type formType = {
 };
 
 const schema = yup.object({
-  position: yup.string().required(),
-  employer: yup.string().required(),
+  position: yup
+    .string()
+    .required("სავალდებულო ველი")
+    .min(8, "უნდა შეიყვანოთ მინიმუმ 8 სიბოლო"),
+  employer: yup
+    .string()
+    .required("სავალდებულო ველი")
+    .min(8, "უნდა შეიყვანოთ მინიმუმ 8 სიბოლო"),
   startNumber: yup.date().required(),
   endNumber: yup.date().required(),
   description: yup.string().required(),
