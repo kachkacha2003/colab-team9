@@ -41,6 +41,10 @@ export default function EnterPersonalData() {
   };
 
   const positionInput = watch("position");
+  const employerInput = watch("employer");
+  const startNumberInput = watch("startNumber");
+  const endNumberInput = watch("endNumber");
+  const descriptionInput = watch("description");
 
   return (
     <div className="flex">
@@ -77,7 +81,6 @@ export default function EnterPersonalData() {
                 placeholder="დეველოპერი, დიზაინერი, ა.შ."
                 className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
               />
-              <p>{positionInput}</p>
               {errors.position ? (
                 <p className="text-red-500">{errors.position.message}</p>
               ) : null}
@@ -100,7 +103,7 @@ export default function EnterPersonalData() {
                     <div className="">
                       <input
                         type="date"
-                        {...register("startNumber", { valueAsDate: true })}
+                        {...register("startNumber")}
                         placeholder="mm / dd / yyyy"
                         className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
                       />
@@ -108,7 +111,7 @@ export default function EnterPersonalData() {
                     <div className="">
                       <input
                         type="date"
-                        {...register("endNumber", { valueAsDate: true })}
+                        {...register("endNumber")}
                         placeholder="mm / dd / yyyy"
                         className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
                       />
@@ -155,7 +158,13 @@ export default function EnterPersonalData() {
           </div>
         </div>
       </div>
-      <PersonalData />
+      <PersonalData
+        positionInput={positionInput}
+        employerInput={employerInput}
+        startNumberInput={startNumberInput}
+        endNumberInput={endNumberInput}
+        descriptionInput={descriptionInput}
+      />
     </div>
   );
 }

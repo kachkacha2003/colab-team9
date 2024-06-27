@@ -1,6 +1,20 @@
 import WorkHistory from "./WorkHistory";
 
-export default function PersonalData() {
+type infoProps = {
+  positionInput: string;
+  employerInput: string;
+  startNumberInput: Date;
+  endNumberInput: Date;
+  descriptionInput: string;
+};
+
+export default function PersonalData({
+  positionInput,
+  employerInput,
+  startNumberInput,
+  endNumberInput,
+  descriptionInput,
+}: infoProps) {
   return (
     <div className="flex p-5 ml-20">
       <div className="">
@@ -22,8 +36,15 @@ export default function PersonalData() {
             ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები
             გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.
           </div>
+          <div className=""></div>
         </div>
-        <WorkHistory name={"sfdvcdvc"} lastName={"sdvcdsvc"} />
+        <WorkHistory
+          positionInput={positionInput}
+          employerInput={employerInput}
+          startNumberInput={startNumberInput}
+          endNumberInput={endNumberInput}
+          descriptionInput={descriptionInput}
+        />
       </div>
       <div className="">
         <img src="/images/person-image.png" alt="person-image.png" />
