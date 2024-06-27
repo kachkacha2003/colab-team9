@@ -1,9 +1,6 @@
-import React, { useState } from "react";
 import WorkHistory from "./WorkHistory";
 
 export default function PersonalData() {
-  const [positionInput, setPositionInput] = useState("");
-
   return (
     <div className="flex p-5 ml-20">
       <div className="">
@@ -26,7 +23,7 @@ export default function PersonalData() {
             გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.
           </div>
         </div>
-        <WorkHistory />
+        <WorkHistory name={"sfdvcdvc"} lastName={"sdvcdsvc"} />
       </div>
       <div className="">
         <img src="/images/person-image.png" alt="person-image.png" />
