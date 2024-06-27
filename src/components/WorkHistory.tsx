@@ -1,8 +1,8 @@
 type historyProps = {
   positionInput: string;
   employerInput: string;
-  startNumberInput: Date;
-  endNumberInput: Date;
+  startNumberInput: string;
+  endNumberInput: string;
   descriptionInput: string;
 };
 

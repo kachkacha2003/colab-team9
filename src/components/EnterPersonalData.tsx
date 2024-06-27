@@ -7,23 +7,17 @@ import PersonalData from "./PersonalData";
 type formType = {
   position: string;
   employer: string;
-  startNumber: Date;
-  endNumber: Date;
+  startNumber: string;
+  endNumber: string;
   description: string;
 };
 
 const schema = yup.object({
-  position: yup
-    .string()
-    .required("სავალდებულო ველი")
-    .min(8, "უნდა შეიყვანოთ მინიმუმ 8 სიბოლო"),
-  employer: yup
-    .string()
-    .required("სავალდებულო ველი")
-    .min(8, "უნდა შეიყვანოთ მინიმუმ 8 სიბოლო"),
-  startNumber: yup.date().required(),
-  endNumber: yup.date().required(),
-  description: yup.string().required(),
+  position: yup.string().required("სავალდებულო ველი"),
+  employer: yup.string().required("სავალდებულო ველი"),
+  startNumber: yup.string().required("სავალდებულო ველი"),
+  endNumber: yup.string().required("სავალდებულო ველი"),
+  description: yup.string().required("სავალდებულო ველი"),
 });
 
 export default function EnterPersonalData() {
@@ -31,6 +25,7 @@ export default function EnterPersonalData() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -38,6 +33,7 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
+    reset();
   };
 
   const positionInput = watch("position");
@@ -82,7 +78,7 @@ export default function EnterPersonalData() {
                 className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
               />
               {errors.position ? (
-                <p className="text-red-500">{errors.position.message}</p>
+                <p className="text-mediumRed">{errors.position.message}</p>
               ) : null}
               <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
               <p className="font-medium mt-3">დამსაქმებელი</p>
@@ -93,7 +89,7 @@ export default function EnterPersonalData() {
                 className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
               />
               {errors.employer ? (
-                <p className="text-red-500">{errors.employer.message}</p>
+                <p className="text-mediumRed">{errors.employer.message}</p>
               ) : null}
               <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
               <div className="mt-5 flex justify-between">
@@ -107,6 +103,11 @@ export default function EnterPersonalData() {
                         placeholder="mm / dd / yyyy"
                         className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
                       />
+                      {errors.startNumber ? (
+                        <p className="text-mediumRed">
+                          {errors.startNumber.message}
+                        </p>
+                      ) : null}
                     </div>
                     <div className="">
                       <input
@@ -115,6 +116,11 @@ export default function EnterPersonalData() {
                         placeholder="mm / dd / yyyy"
                         className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
                       />
+                      {errors.endNumber ? (
+                        <p className="text-mediumRed">
+                          {errors.endNumber.message}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -127,7 +133,7 @@ export default function EnterPersonalData() {
                   className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
                 ></textarea>
                 {errors.description ? (
-                  <p className="text-red-500">{errors.description.message}</p>
+                  <p className="text-mediumRed">{errors.description.message}</p>
                 ) : null}
               </div>
               <div className="mt-10">
@@ -149,8 +155,15 @@ export default function EnterPersonalData() {
                   >
                     ᲣᲙᲐᲜ
                   </Button>
-                  <Button variant="outline" size="large" type="submit">
-                    ᲨᲔᲛᲓᲔᲒᲘ
+                  <Button
+                    variant="outline"
+                    size="large"
+                    onClick={handleSubmit((data) => {
+                      console.log(data);
+                      reset();
+                    })}
+                  >
+                    შემდეგი
                   </Button>
                 </div>
               </div>
