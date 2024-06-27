@@ -29,6 +29,7 @@ export default function EnterPersonalData() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -37,6 +38,8 @@ export default function EnterPersonalData() {
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
   };
+
+  const positionInput = watch("position");
 
   return (
     <div className="bg-gray-100">
@@ -88,21 +91,26 @@ export default function EnterPersonalData() {
             ) : null}
             <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
             <div className="mt-5 flex justify-between">
-              <div className="">
+              <div className="w-full">
                 <p className="font-medium">დაწყების რიცხვი</p>
-                <input
-                  type="date"
-                  {...register("startNumber", { valueAsDate: true })}
-                  placeholder="mm / dd / yyyy"
-                  className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
-                />
-
-                <input
-                  type="date"
-                  {...register("endNumber", { valueAsDate: true })}
-                  placeholder="mm / dd / yyyy"
-                  className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
-                />
+                <div className="flex justify-between">
+                  <div className="">
+                    <input
+                      type="date"
+                      {...register("startNumber", { valueAsDate: true })}
+                      placeholder="mm / dd / yyyy"
+                      className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+                    />
+                  </div>
+                  <div className="">
+                    <input
+                      type="date"
+                      {...register("endNumber", { valueAsDate: true })}
+                      placeholder="mm / dd / yyyy"
+                      className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div className="w-full mt-5">
