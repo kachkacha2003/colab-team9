@@ -75,6 +75,7 @@ export default function EnterPersonalData() {
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
               className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
             />
+            <p>{positionInput}</p>
             {errors.position ? (
               <p className="text-red-500">{errors.position.message}</p>
             ) : null}

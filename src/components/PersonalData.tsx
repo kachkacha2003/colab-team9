@@ -1,4 +1,9 @@
+import React, { useState } from "react";
+import WorkHistory from "./WorkHistory";
+
 export default function PersonalData() {
+  const [positionInput, setPositionInput] = useState("");
+
   return (
     <div className="flex p-5 ml-20">
       <div className="">
@@ -16,11 +21,12 @@ export default function PersonalData() {
         </div>
         <div className="mt-9">
           <span className="text-lg text-mediumRed font-bold">ჩემ შესახებ</span>
-          <div className="leading-6 max-w-[432px] mt-4 font-normal">
+          <div className="leading-6 max-w-[432px] mt-4 font-normal border-b pb-4">
             ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები
             გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.
           </div>
         </div>
+        <WorkHistory />
       </div>
       <div className="">
         <img src="/images/person-image.png" alt="person-image.png" />
