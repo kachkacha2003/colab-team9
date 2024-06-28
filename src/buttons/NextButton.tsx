@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 type TsetCount = {
   setCount: React.Dispatch<React.SetStateAction<number>>;
 };

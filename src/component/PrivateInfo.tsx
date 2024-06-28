@@ -9,7 +9,7 @@ import accept from "/images/accept.svg";
 import decline from "/images/decline.svg";
 
 const regexLetters = /^[\u10A0-\u10FF]+$/;
-const regexMail = /^[a-zA-Z]+@redberry\.ge$/;
+const regexMail = /^[a-zA-Z0-9._%+-]+@redberry\.ge$/;
 const regexTel = /^\+995(5\d{8}|\d{9})$/;
 
 function PrivateInfo() {
@@ -69,17 +69,17 @@ function PrivateInfo() {
     const file: File = files[0];
     const imageUrl: string = URL.createObjectURL(file);
     setValue("files", imageUrl);
-    console.log(imageUrl);
+    console.log(files);
     console.log(data);
   };
   console.log(errors.email);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex text-off-black leading-5 w-[1100px] "
+      className="flex text-off-black leading-5 w-[1100px]  "
     >
       <BackButtonArrow location={"/"} />
-      <div className="ml-[126px]  h-screen  ">
+      <div className="pl-[126px]  h-screen bg-[#F9F9F9]   ">
         <div className="flex justify-between mt-12 border-b border-off-black w-[800px]">
           <h1 className="font-bold text-2xl ">პირადი ინფო</h1>
           <span className="text-xl font-normal ">1/3</span>
