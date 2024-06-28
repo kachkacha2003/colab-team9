@@ -1,8 +1,8 @@
-
 import EnterPersonalData from "./components/EnterPersonalData";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import PrivateInfo from "./component/PrivateInfo";
+import HomePage from "./components/HomePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,11 +14,14 @@ function App() {
       path: "experienceInfo",
       element: <EnterPersonalData />,
     },
+    {
+      path: "/",
+      element: <HomePage />,
+    },
   ]);
   return (
     <>
       <RouterProvider router={router} />
-
     </>
   );
 }
