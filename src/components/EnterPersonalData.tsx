@@ -13,11 +13,12 @@ type formType = {
 };
 
 const schema = yup.object({
-  position: yup.string().required("სავალდებულო ველი"),
-  employer: yup.string().required("სავალდებულო ველი"),
-  startNumber: yup.string().required("სავალდებულო ველი"),
-  endNumber: yup.string().required("სავალდებულო ველი"),
-  description: yup.string().required("სავალდებულო ველი"),
+  position: yup.string().min(2, "").required("სავალდებულო ველი"),
+
+  employer: yup.string().min(2, "").required("სავალდებულო ველი"),
+  startNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
+  endNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
+  description: yup.string().min(2, "").required("სავალდებულო ველი"),
 });
 
 export default function EnterPersonalData() {
@@ -75,7 +76,13 @@ export default function EnterPersonalData() {
                 type="text"
                 {...register("position")}
                 placeholder="დეველოპერი, დიზაინერი, ა.შ."
-                className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
+                className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
+                  errors.position
+                    ? "border-red-500"
+                    : positionInput && positionInput.length >= 2
+                    ? "border-green-500"
+                    : "border-gray-300"
+                }`}
               />
               {errors.position ? (
                 <p className="text-mediumRed">{errors.position.message}</p>
@@ -86,7 +93,13 @@ export default function EnterPersonalData() {
                 type="text"
                 {...register("employer")}
                 placeholder="დამსაქმებელი"
-                className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
+                className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
+                  errors.employer
+                    ? "border-red-500"
+                    : employerInput && employerInput.length >= 2
+                    ? "border-green-500"
+                    : "border-gray-300"
+                }`}
               />
               {errors.employer ? (
                 <p className="text-mediumRed">{errors.employer.message}</p>
@@ -101,7 +114,13 @@ export default function EnterPersonalData() {
                         type="date"
                         {...register("startNumber")}
                         placeholder="mm / dd / yyyy"
-                        className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+                        className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
+                          errors.startNumber
+                            ? "border-red-500"
+                            : startNumberInput && startNumberInput.length >= 2
+                            ? "border-green-500"
+                            : "border-gray-300"
+                        }`}
                       />
                       {errors.startNumber ? (
                         <p className="text-mediumRed">
@@ -114,7 +133,13 @@ export default function EnterPersonalData() {
                         type="date"
                         {...register("endNumber")}
                         placeholder="mm / dd / yyyy"
-                        className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+                        className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
+                          errors.endNumber
+                            ? "border-red-500"
+                            : endNumberInput && endNumberInput.length >= 2
+                            ? "border-green-500"
+                            : "border-gray-300"
+                        }`}
                       />
                       {errors.endNumber ? (
                         <p className="text-mediumRed">
@@ -130,7 +155,13 @@ export default function EnterPersonalData() {
                 <textarea
                   placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
                   {...register("description")}
-                  className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
+                  className={`w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none ${
+                    errors.description
+                      ? "border-red-500"
+                      : descriptionInput && descriptionInput.length >= 2
+                      ? "border-green-500"
+                      : "border-gray-300"
+                  }`}
                 ></textarea>
                 {errors.description ? (
                   <p className="text-mediumRed">{errors.description.message}</p>
