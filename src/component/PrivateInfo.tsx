@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import NextButton from "../buttons/NextButton";
 import * as yup from "yup";
@@ -15,7 +15,7 @@ const regexTel = /^\+995(5\d{8}|\d{9})$/;
 
 function PrivateInfo() {
   const [count, setCount] = useState<number>(0);
-
+  const [calc, setCalc] = useState<number>(0);
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -69,26 +69,34 @@ function PrivateInfo() {
   const phone = watch("phone");
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const file: File = files[0];
-    const imageUrl: string = URL.createObjectURL(file);
-    setValue("files", imageUrl);
     console.log(data);
-    localStorage.setItem("name", name);
-    localStorage.setItem("lastName", lastName);
-    localStorage.setItem("files", files);
-    localStorage.setItem("email", email);
-    localStorage.setItem("phone", phone);
-    if (
-      !errors.name &&
-      !errors.lastName &&
-      !errors.files &&
-      !errors.aboutme &&
-      !errors.email &&
-      !errors.phone
-    ) {
-      navigate("/experienceInfo");
-    }
+    navigate("/experienceInfo");
   };
+
+  useEffect(() => {
+    if (name) {
+      localStorage.setItem("name", name);
+    }
+    if (lastName) {
+      localStorage.setItem("lastName", lastName);
+    }
+    if (files) {
+      localStorage.setItem("files", files);
+    }
+    if (email) {
+      localStorage.setItem("email", email);
+    }
+    if (phone) {
+      localStorage.setItem("phone", phone);
+    }
+  }, [name, lastName, files, email, phone]);
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("name") !== "undefined") {
+  //     setValue("name", localStorage.getItem("name"));
+  //   }
+  // }, []);
+
   console.log(files);
   return (
     <form
@@ -114,7 +122,11 @@ function PrivateInfo() {
               } flex justify-between`}
             >
               <input
-                defaultValue={localStorage.getItem("name") || ""}
+                defaultValue={
+                  localStorage.getItem("name") !== "undefined"
+                    ? localStorage.getItem("name")
+                    : ""
+                }
                 className="outline-none w-[272px]"
                 placeholder="ანზორ"
                 type="text"
@@ -147,7 +159,11 @@ function PrivateInfo() {
               } flex justify-between `}
             >
               <input
-                defaultValue={localStorage.getItem("lastName") || ""}
+                defaultValue={
+                  localStorage.getItem("lastName") !== "undefined"
+                    ? localStorage.getItem("lastName")
+                    : ""
+                }
                 className="outline-none w-[272px]"
                 placeholder="მუმლაძე"
                 type="text"
@@ -176,6 +192,11 @@ function PrivateInfo() {
             type="file"
             id="files"
             {...register("files")}
+            onChange={(e) => {
+              const file: File = e.target.files && e.target.files[0];
+              const imageUrl: string = URL.createObjectURL(file);
+              setValue("files", imageUrl);
+            }}
           ></input>
 
           <div className="ml-[19px] bg-[#0E80BF] w-[107px] h-[27px] flex justify-center items-center rounded text-white ">
@@ -187,7 +208,11 @@ function PrivateInfo() {
             ჩემ შესახებ (არასავალდებულო)
           </label>
           <textarea
-            defaultValue={localStorage.getItem("aboutme") || ""}
+            defaultValue={
+              localStorage.getItem("aboutme") !== "undefined"
+                ? localStorage.getItem("aboutme")
+                : ""
+            }
             placeholder="ზოგადი ინფო შენ შესახებ"
             className=" min-w-[300px]  min-h-[50px] max-w-[798px] max-h-[103px] h-[103px] text-top px-4 pt-[13px] border-[1px] border-off-grey rounded mt-2 resize outline-none"
             id="aboutme"
@@ -208,7 +233,11 @@ function PrivateInfo() {
             } flex justify-between `}
           >
             <input
-              defaultValue={localStorage.getItem("email") || ""}
+              defaultValue={
+                localStorage.getItem("email") !== "undefined"
+                  ? localStorage.getItem("email")
+                  : ""
+              }
               className="outline-none w-[900px]"
               placeholder="anzorr666@redberry.ge"
               type="text"
@@ -243,7 +272,11 @@ function PrivateInfo() {
             } flex justify-between `}
           >
             <input
-              defaultValue={localStorage.getItem("phone") || ""}
+              defaultValue={
+                localStorage.getItem("phone") !== "undefined"
+                  ? localStorage.getItem("phone")
+                  : ""
+              }
               className="outline-none w-[900px]"
               placeholder="+995 551 12 34 56"
               type="tel"
@@ -266,14 +299,7 @@ function PrivateInfo() {
         </div>
         <NextButton setCount={setCount} />
       </div>
-      <Profile
-        name={name}
-        lastName={lastName}
-        files={files}
-        aboutme={aboutme}
-        email={email}
-        phone={phone}
-      />
+      <Profile />
     </form>
   );
 }
