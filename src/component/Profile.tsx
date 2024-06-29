@@ -1,7 +1,7 @@
 import mail from "/images/email.svg";
 import telphone from "/images/phone.svg";
 import logo from "/images/LOGO-12.png";
-function Profile({ name, lastName, phone, aboutme, files, email }: Inputs) {
+function Profile({ name, last_name, number, bio, files, email }: Inputs) {
   return (
     <div className="ml-[80px] relative min-w-[622px] ">
       <div className="flex  ">
@@ -13,10 +13,10 @@ function Profile({ name, lastName, phone, aboutme, files, email }: Inputs) {
               ? localStorage.getItem("name")
               : null}
             &nbsp;
-            {lastName
-              ? lastName
-              : localStorage.getItem("lastName")
-              ? localStorage.getItem("lastName")
+            {last_name
+              ? last_name
+              : localStorage.getItem("last_name")
+              ? localStorage.getItem("last_name")
               : null}
           </h1>
           <div className="flex mt-[17px]">
@@ -32,28 +32,28 @@ function Profile({ name, lastName, phone, aboutme, files, email }: Inputs) {
             </address>
           </div>
           <div className="flex mt-[10px]">
-            {localStorage.getItem("phone") && (
-              <img src={telphone} alt="phone icon" />
+            {localStorage.getItem("number") && (
+              <img src={telphone} alt="number icon" />
             )}
             <address className="text-lg ml-[10px]">
-              {phone
-                ? phone
-                : localStorage.getItem("phone")
-                ? localStorage.getItem("phone")
+              {number
+                ? number
+                : localStorage.getItem("number")
+                ? localStorage.getItem("number")
                 : null}{" "}
             </address>
           </div>
           <div className="mt-[34px]  ">
-            {localStorage.getItem("aboutme") && (
+            {localStorage.getItem("bio") && (
               <h4 className="text-mediumRed text-[18px] 	font-bold ">
                 ჩემ შესახებ
               </h4>
             )}
             <p className="mt-[15px] break-words">
-              {aboutme
-                ? aboutme
-                : localStorage.getItem("aboutme")
-                ? localStorage.getItem("aboutme")
+              {bio
+                ? bio
+                : localStorage.getItem("bio")
+                ? localStorage.getItem("bio")
                 : null}{" "}
             </p>
           </div>
@@ -75,11 +75,11 @@ function Profile({ name, lastName, phone, aboutme, files, email }: Inputs) {
         </div>
       </div>
       {localStorage.getItem("name") ||
-      localStorage.getItem("lastName") ||
+      localStorage.getItem("last_name") ||
       localStorage.getItem("email") ||
       localStorage.getItem("files") ||
-      localStorage.getItem("aboutme") ||
-      localStorage.getItem("phone") ? (
+      localStorage.getItem("bio") ||
+      localStorage.getItem("number") ? (
         <hr className="w-full h-[1px] bg-lightGray "></hr>
       ) : null}
       <img className="absolute bottom-[20px]" src={logo} alt="Logo" />
