@@ -2,7 +2,8 @@ import Button from "./Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import PersonalData from "./PersonalData";
+import BackButtonArrow from "../buttons/BackButtonArrow";
+import Profile from "../component/Profile";
 
 type formType = {
   position: string;
@@ -46,21 +47,7 @@ export default function EnterPersonalData() {
     <div className="flex">
       <div className="bg-gray-100">
         <div className="flex pl-12 pt-12 pr-32 ">
-          <div className="">
-            <Button
-              variant="primary"
-              size="medium"
-              isRound
-              onClick={() => console.log("Clicked!")}
-              className="p-2"
-            >
-              <img
-                src="/images/lefterrow.png"
-                alt=""
-                className="w-full h-full object-contain"
-              />
-            </Button>
-          </div>
+          <BackButtonArrow location="/privateInfo" />
           <div className="ml-16 w-[798px]">
             <div className=" flex justify-between border-b border-black">
               <span className="text-2xl	font-bold">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</span>
@@ -137,32 +124,21 @@ export default function EnterPersonalData() {
                 ) : null}
               </div>
               <div className="mt-10">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => console.log("Clicked!")}
-                >
+                <Button type="button" variant="secondary">
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
                   <Button
+                    location="/privateInfo"
                     type="button"
                     variant="outline"
                     size="large"
-                    onClick={() => console.log("Clicked!")}
                   >
                     ᲣᲙᲐᲜ
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="large"
-                    onClick={handleSubmit((data) => {
-                      console.log(data);
-                      reset();
-                    })}
-                  >
+                  <Button variant="outline" size="large">
                     შემდეგი
                   </Button>
                 </div>
@@ -171,13 +147,7 @@ export default function EnterPersonalData() {
           </div>
         </div>
       </div>
-      <PersonalData
-        positionInput={positionInput}
-        employerInput={employerInput}
-        startNumberInput={startNumberInput}
-        endNumberInput={endNumberInput}
-        descriptionInput={descriptionInput}
-      />
+      <Profile />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import NextButton from "../buttons/NextButton";
 import * as yup from "yup";
@@ -8,6 +8,7 @@ import BackButtonArrow from "../buttons/BackButtonArrow";
 import accept from "/images/accept.svg";
 import decline from "/images/decline.svg";
 import { useNavigate } from "react-router-dom";
+import { GlobalAPI } from "../logic/ContextAPI";
 
 const regexLetters = /^[\u10A0-\u10FF]+$/;
 const regexMail = /@redberry\.ge$/;
@@ -16,6 +17,8 @@ const regexTel = /^\+995(5\d{8}|\d{9})$/;
 function PrivateInfo() {
   const [count, setCount] = useState<number>(0);
   const [calc, setCalc] = useState<number>(0);
+  const { mainInfo, setMainInfo } = useContext(GlobalAPI);
+
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -70,6 +73,7 @@ function PrivateInfo() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+    setMainInfo(data);
     navigate("/experienceInfo");
   };
 
@@ -83,21 +87,17 @@ function PrivateInfo() {
     if (files) {
       localStorage.setItem("files", files);
     }
+    if (aboutme) {
+      localStorage.setItem("aboutme", aboutme);
+    }
     if (email) {
       localStorage.setItem("email", email);
     }
     if (phone) {
       localStorage.setItem("phone", phone);
     }
-  }, [name, lastName, files, email, phone]);
+  }, [name, lastName, files, email, phone, aboutme]);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("name") !== "undefined") {
-  //     setValue("name", localStorage.getItem("name"));
-  //   }
-  // }, []);
-
-  console.log(files);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -123,8 +123,9 @@ function PrivateInfo() {
             >
               <input
                 defaultValue={
-                  localStorage.getItem("name") !== "undefined"
-                    ? localStorage.getItem("name")
+                  localStorage.getItem("name") !== "undefined" &&
+                  localStorage.getItem("name") !== null
+                    ? localStorage.getItem("name") || ""
                     : ""
                 }
                 className="outline-none w-[272px]"
@@ -160,8 +161,9 @@ function PrivateInfo() {
             >
               <input
                 defaultValue={
-                  localStorage.getItem("lastName") !== "undefined"
-                    ? localStorage.getItem("lastName")
+                  localStorage.getItem("lastName") !== "undefined" &&
+                  localStorage.getItem("lastName") !== null
+                    ? localStorage.getItem("lastName") || ""
                     : ""
                 }
                 className="outline-none w-[272px]"
@@ -209,8 +211,9 @@ function PrivateInfo() {
           </label>
           <textarea
             defaultValue={
-              localStorage.getItem("aboutme") !== "undefined"
-                ? localStorage.getItem("aboutme")
+              localStorage.getItem("aboutme") !== "undefined" &&
+              localStorage.getItem("aboutme") !== null
+                ? localStorage.getItem("aboutme") || ""
                 : ""
             }
             placeholder="ზოგადი ინფო შენ შესახებ"
@@ -234,8 +237,9 @@ function PrivateInfo() {
           >
             <input
               defaultValue={
-                localStorage.getItem("email") !== "undefined"
-                  ? localStorage.getItem("email")
+                localStorage.getItem("email") !== "undefined" &&
+                localStorage.getItem("email") !== null
+                  ? localStorage.getItem("email") || ""
                   : ""
               }
               className="outline-none w-[900px]"
@@ -273,8 +277,9 @@ function PrivateInfo() {
           >
             <input
               defaultValue={
+                localStorage.getItem("phone") !== "undefined" &&
                 localStorage.getItem("phone") !== "undefined"
-                  ? localStorage.getItem("phone")
+                  ? localStorage.getItem("phone") || ""
                   : ""
               }
               className="outline-none w-[900px]"
@@ -299,7 +304,14 @@ function PrivateInfo() {
         </div>
         <NextButton setCount={setCount} />
       </div>
-      <Profile />
+      <Profile
+        name={name}
+        lastName={lastName}
+        aboutme={aboutme}
+        files={files}
+        phone={phone}
+        email={email}
+      />
     </form>
   );
 }

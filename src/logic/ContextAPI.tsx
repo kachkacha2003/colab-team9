@@ -5,23 +5,14 @@ type TMain = {
   name: string;
   lastName: string;
   file: string;
-  aboutme: string;
+  aboutme?: string | undefined;
   email: string;
   phone: string;
 };
 
 type TMainInfo = {
   mainInfo: TMain;
-  setMainInfo: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      lastName: string;
-      file: string;
-      aboutme: string;
-      email: string;
-      phone: string;
-    }>
-  >;
+  setMainInfo: React.Dispatch<React.SetStateAction<TMain>>;
 };
 
 export const GlobalAPI = createContext<TMainInfo>({

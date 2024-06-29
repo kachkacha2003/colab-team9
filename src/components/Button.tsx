@@ -1,12 +1,15 @@
 import React, { ButtonHTMLAttributes } from "react";
+import { Link } from "react-router-dom";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   size?: "small" | "medium" | "large";
   isRound?: boolean;
+  location: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
+  location,
   children,
   variant = "primary",
   size = "medium",
@@ -34,9 +37,9 @@ const Button: React.FC<ButtonProps> = ({
   const classes = `${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`;
 
   return (
-    <button className={classes} {...props}>
+    <Link to={location} className={classes} {...props}>
       {children}
-    </button>
+    </Link>
   );
 };
 
