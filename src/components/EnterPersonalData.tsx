@@ -2,8 +2,9 @@ import Button from "./Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import PersonalData from "./PersonalData";
+import WorkHistory from "./WorkHistory";
 import ExperienceInputs from "./ExperienceInputs";
+import { useState } from "react";
 
 type formType = {
   position: string;
@@ -15,7 +16,6 @@ type formType = {
 
 const schema = yup.object({
   position: yup.string().min(2, "").required("სავალდებულო ველი"),
-
   employer: yup.string().min(2, "").required("სავალდებულო ველი"),
   startNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
   endNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
@@ -23,13 +23,15 @@ const schema = yup.object({
 });
 
 export default function EnterPersonalData() {
+  const [count, setCount] = useState(1);
+
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<formType>({
     resolver: yupResolver(schema),
   });
 
@@ -66,17 +68,25 @@ export default function EnterPersonalData() {
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
-              <ExperienceInputs
-                register={register}
-                errors={errors}
-                positionInput={positionInput}
-                employerInput={employerInput}
-                startNumberInput={startNumberInput}
-                endNumberInput={endNumberInput}
-                descriptionInput={descriptionInput}
-              />
+              {[...Array(count)].map((_, index) => (
+                <ExperienceInputs
+                  key={index}
+                  register={register}
+                  errors={errors}
+                  positionInput={positionInput}
+                  employerInput={employerInput}
+                  startNumberInput={startNumberInput}
+                  endNumberInput={endNumberInput}
+                  descriptionInput={descriptionInput}
+                />
+              ))}
               <div className="mt-10">
-                <Button type="button" variant="secondary">
+                <Button
+                  count={count}
+                  setCount={setCount}
+                  type="button"
+                  variant="secondary"
+                >
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
@@ -88,10 +98,7 @@ export default function EnterPersonalData() {
                   <Button
                     variant="outline"
                     size="large"
-                    onClick={handleSubmit((data) => {
-                      console.log(data);
-                      reset();
-                    })}
+                    onClick={handleSubmit(onSubmit)}
                   >
                     შემდეგი
                   </Button>
@@ -101,7 +108,7 @@ export default function EnterPersonalData() {
           </div>
         </div>
       </div>
-      <PersonalData
+      <WorkHistory
         positionInput={positionInput}
         employerInput={employerInput}
         startNumberInput={startNumberInput}
