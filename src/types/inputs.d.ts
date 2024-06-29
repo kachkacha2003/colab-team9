@@ -1,8 +1,8 @@
 type Inputs = {
   name: string;
-  lastName: string;
+  last_name: string;
   files: string;
-  aboutme?: string;
+  bio?: string;
   email: string;
-  phone: string;
+  number: string;
 };

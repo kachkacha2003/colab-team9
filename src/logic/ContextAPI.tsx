@@ -1,37 +1,19 @@
 import React, { createContext, useState } from "react";
 import App from "../App";
 
-type TMain = {
-  name: string;
-  lastName: string;
-  file: string;
-  aboutme: string;
-  email: string;
-  phone: string;
-};
-
 type TMainInfo = {
-  mainInfo: TMain;
-  setMainInfo: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      lastName: string;
-      file: string;
-      aboutme: string;
-      email: string;
-      phone: string;
-    }>
-  >;
+  mainInfo: Inputs;
+  setMainInfo: React.Dispatch<React.SetStateAction<Inputs>>;
 };
 
 export const GlobalAPI = createContext<TMainInfo>({
   mainInfo: {
     name: "",
-    lastName: "",
-    file: "",
-    aboutme: "",
+    last_name: "",
+    files: "",
+    bio: "",
     email: "",
-    phone: "",
+    number: "",
   },
   setMainInfo: () => {},
 });
@@ -39,12 +21,13 @@ export const GlobalAPI = createContext<TMainInfo>({
 function ContextAPI() {
   const [mainInfo, setMainInfo] = useState({
     name: "",
-    lastName: "",
-    file: "",
-    aboutme: "",
+    last_name: "",
+    files: "",
+    bio: "",
     email: "",
-    phone: "",
+    number: "",
   });
+  console.log(mainInfo);
   return (
     <>
       <GlobalAPI.Provider value={{ mainInfo, setMainInfo }}>
