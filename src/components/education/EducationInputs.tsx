@@ -64,18 +64,24 @@ export default function EducationInputs({
       </div>
       <div className="flex">
         <div className="relative">
-          <input
-            type="text"
+          <select
+            title="title"
             {...register("degree")}
-            placeholder="ხარისხი"
-            className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
-              errors.degree
-                ? "border-red-500"
-                : degree && degree.length >= 2
-                ? "border-green-500"
-                : "border-gray-300"
-            }`}
-          />
+            className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+          >
+            <option selected disabled>
+              აირჩიეთ ხარისხი
+            </option>
+            <option>საშუალო სკოლის დიპლომი</option>
+            <option>ზოგადსაგანმანათლებლო დიპლომი</option>
+            <option>ბაკალავრი</option>
+            <option>მაგისტრი</option>
+            <option>დოქტორი</option>
+            <option>ასოცირებული ხარისხი</option>
+            <option>სტუდენტი</option>
+            <option>კოლეჯი (ხარისხის გარეშე)</option>
+            <option>სხვა</option>
+          </select>
           {errors.degree && (
             <img
               src="/images/error-icon.png"
