@@ -27,24 +27,49 @@ export default function WorkHistory({
       localStorage.getItem("description") ? (
         <h2 className="font-bold text-lg text-mediumRed">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
       ) : null}
-
-      <span className="mt-4 font-medium	">
-        {positionInput}
-        {!positionInput ? null : ","}
-      </span>
-      <span className="ml-2 font-medium">{employerInput}</span>
+      <div className="mt-4 ">
+        <span className=" font-medium	">
+          {positionInput}
+          {!positionInput ? null : ","}
+        </span>
+        <span className="ml-2 font-medium">
+          {" "}
+          {employerInput
+            ? employerInput
+            : localStorage.getItem("employer")
+            ? localStorage.getItem("employer")
+            : null}
+        </span>
+      </div>
       <div className="flex mt-2">
         <p className="mr-2 text-lightGray font-normal">
-          {startNumberInput ? startNumberInput.toString() : ""}
+          {startNumberInput
+            ? startNumberInput
+            : localStorage.getItem("startNumber")
+            ? localStorage.getItem("startNumber")
+            : null}
         </p>
-        {startNumberInput && endNumberInput && (
+        {(startNumberInput && endNumberInput) ||
+        (localStorage.getItem("startNumber") &&
+          localStorage.getItem("endNumber")) ? (
           <p className="text-lightGray font-normal"> - </p>
-        )}
+        ) : null}
         <p className="ml-2 text-lightGray font-normal">
-          {endNumberInput ? endNumberInput.toString() : ""}
+          {endNumberInput
+            ? endNumberInput
+            : localStorage.getItem("endNumber")
+            ? localStorage.getItem("endNumber")
+            : null}
         </p>
       </div>
-      <p className="mt-4 w-[662px] pb-8 ">{descriptionInput}</p>
+      <p className="mt-4 w-[662px] pb-8 ">
+        {" "}
+        {descriptionInput
+          ? descriptionInput
+          : localStorage.getItem("description")
+          ? localStorage.getItem("description")
+          : null}
+      </p>
     </div>
   );
 }
