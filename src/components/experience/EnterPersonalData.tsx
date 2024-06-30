@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -7,10 +7,10 @@ import WorkHistory from "./WorkHistory";
 import ExperienceInputs from "./ExperienceInputs";
 import { useState } from "react";
 
-import BackButtonArrow from "../buttons/BackButtonArrow";
-import Profile from "../component/Profile";
+import BackButtonArrow from "../../buttons/BackButtonArrow";
+// import Profile from "../../component/Profile";
 
-
+// ზედა და ქვედა ნაწილი
 type formType = {
   position: string;
   employer: string;
@@ -55,7 +55,6 @@ export default function EnterPersonalData() {
     <div className="flex">
       <div className="bg-gray-100">
         <div className="flex pl-12 pt-12 pr-32 ">
-
           <BackButtonArrow location="/privateInfo" />
 
           <div className="ml-16 w-[798px]">
@@ -80,20 +79,17 @@ export default function EnterPersonalData() {
                 />
               ))}
               <div className="mt-10">
-
                 <Button
                   count={count}
                   setCount={setCount}
                   type="button"
                   variant="secondary"
                 >
-
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
-
                   <Button type="button" variant="outline" size="large">
                     ᲣᲙᲐᲜ
                   </Button>
@@ -102,7 +98,6 @@ export default function EnterPersonalData() {
                     size="large"
                     onClick={handleSubmit(onSubmit)}
                   >
-
                     შემდეგი
                   </Button>
                 </div>
@@ -119,7 +114,6 @@ export default function EnterPersonalData() {
         endNumberInput={endNumberInput}
         descriptionInput={descriptionInput}
       />
-
     </div>
   );
 }

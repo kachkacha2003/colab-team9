@@ -8,6 +8,8 @@ type InputType = {
   description: string;
 };
 
+//input file
+
 interface ExperienceInputsProps {
   register: UseFormRegister<InputType>;
   errors: FieldErrors<InputType>;

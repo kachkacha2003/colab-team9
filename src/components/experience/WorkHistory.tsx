@@ -6,6 +6,8 @@ type historyProps = {
   descriptionInput: string;
 };
 
+//მარჯვენა მხარე
+
 export default function WorkHistory({
   positionInput,
   employerInput,
