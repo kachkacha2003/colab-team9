@@ -5,12 +5,13 @@ import * as yup from "yup";
 
 import WorkHistory from "./WorkHistory";
 import ExperienceInputs from "./ExperienceInputs";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import BackButtonArrow from "../buttons/BackButtonArrow";
 import Profile from "../component/Profile";
 import NextButton from "../buttons/NextButton";
 import { useLocation, useNavigate } from "react-router-dom";
+import { GlobalAPI } from "../logic/ContextAPI";
 
 type formType = {
   position: string;
@@ -32,6 +33,7 @@ export default function EnterPersonalData() {
   const location = useLocation();
   const { state } = location;
   const navigate = useNavigate();
+  const { setExperience } = useContext(GlobalAPI);
   const {
     register,
     handleSubmit,
@@ -43,6 +45,7 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
+    setExperience(data);
     navigate("/educationInfo");
   };
 
