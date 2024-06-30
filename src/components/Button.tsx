@@ -1,11 +1,9 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { Link } from "react-router-dom";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   size?: "small" | "medium" | "large";
   isRound?: boolean;
-
   setCount?: React.Dispatch<React.SetStateAction<number>>;
   count?: number;
 }
@@ -13,18 +11,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({
   setCount,
   count,
-
-  location: string;
-}
-
-const Button: React.FC<ButtonProps> = ({
-  location,
-
   children,
   variant = "primary",
   size = "medium",
   className = "",
   isRound = false,
+  onClick,
   ...props
 }) => {
   const baseStyle =
@@ -46,21 +38,19 @@ const Button: React.FC<ButtonProps> = ({
 
   const classes = `${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (setCount && count !== undefined) {
       setCount(count + 1);
+    }
+    if (onClick) {
+      onClick(event);
     }
   };
 
   return (
-
     <button onClick={handleClick} className={classes} {...props}>
-
-    <Link to={location} className={classes} {...props}>
-
       {children}
-    </Link>
-      </button>
+    </button>
   );
 };
 
