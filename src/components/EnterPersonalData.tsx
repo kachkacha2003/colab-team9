@@ -2,9 +2,14 @@ import Button from "./Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 import WorkHistory from "./WorkHistory";
 import ExperienceInputs from "./ExperienceInputs";
 import { useState } from "react";
+
+import BackButtonArrow from "../buttons/BackButtonArrow";
+import Profile from "../component/Profile";
+
 
 type formType = {
   position: string;
@@ -50,15 +55,9 @@ export default function EnterPersonalData() {
     <div className="flex">
       <div className="bg-gray-100">
         <div className="flex pl-12 pt-12 pr-32 ">
-          <div className="">
-            <Button variant="primary" size="medium" isRound className="p-2">
-              <img
-                src="/images/lefterrow.png"
-                alt=""
-                className="w-full h-full object-contain"
-              />
-            </Button>
-          </div>
+
+          <BackButtonArrow location="/privateInfo" />
+
           <div className="ml-16 w-[798px]">
             <div className=" flex justify-between border-b border-black">
               <span className="text-2xl	font-bold">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</span>
@@ -81,17 +80,20 @@ export default function EnterPersonalData() {
                 />
               ))}
               <div className="mt-10">
+
                 <Button
                   count={count}
                   setCount={setCount}
                   type="button"
                   variant="secondary"
                 >
+
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
+
                   <Button type="button" variant="outline" size="large">
                     ᲣᲙᲐᲜ
                   </Button>
@@ -100,6 +102,7 @@ export default function EnterPersonalData() {
                     size="large"
                     onClick={handleSubmit(onSubmit)}
                   >
+
                     შემდეგი
                   </Button>
                 </div>
@@ -108,6 +111,7 @@ export default function EnterPersonalData() {
           </div>
         </div>
       </div>
+
       <WorkHistory
         positionInput={positionInput}
         employerInput={employerInput}
@@ -115,6 +119,7 @@ export default function EnterPersonalData() {
         endNumberInput={endNumberInput}
         descriptionInput={descriptionInput}
       />
+
     </div>
   );
 }
