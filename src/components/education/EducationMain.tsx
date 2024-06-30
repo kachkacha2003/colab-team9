@@ -12,17 +12,17 @@ import BackButtonArrow from "../../buttons/BackButtonArrow";
 
 // ზედა და ქვედა ნაწილი
 type formType = {
-  school: string;
+  education: string;
   degree: string;
-  endeducationDate: string;
-  description: string;
+  end_date: string;
+  info: string;
 };
 
 const schema = yup.object({
-  school: yup.string().min(2, "").required("სავალდებულო ველი"),
+  education: yup.string().min(2, "").required("სავალდებულო ველი"),
   degree: yup.string().min(2, "").required("სავალდებულო ველი"),
-  endeducationDate: yup.string().required("სავალდებულო ველი"),
-  description: yup.string().min(2, "").required("სავალდებულო ველი"),
+  end_date: yup.string().required("სავალდებულო ველი"),
+  info: yup.string().min(2, "").required("სავალდებულო ველი"),
 });
 
 export default function EducationMain() {
@@ -43,10 +43,10 @@ export default function EducationMain() {
     reset();
   };
 
-  const schoolInput = watch("school");
+  const educationInput = watch("education");
   const degreeInput = watch("degree");
-  const endeducationDateInput = watch("endeducationDate");
-  const descriptionInput = watch("description");
+  const end_dateInput = watch("end_date");
+  const infoInput = watch("info");
 
   return (
     <div className="flex">
@@ -101,10 +101,10 @@ export default function EducationMain() {
       </div>
 
       <EducationHistory
-        schoolInput={schoolInput}
+        educationInput={educationInput}
         degreeInput={degreeInput}
-        endeducationDateInput={endeducationDateInput}
-        descriptionInput={descriptionInput}
+        end_dateInput={end_dateInput}
+        infoInput={infoInput}
       />
     </div>
   );

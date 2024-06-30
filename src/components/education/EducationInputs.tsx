@@ -1,10 +1,10 @@
 import { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
 
 type InputType = {
-  school: string;
+  education: string;
   degree: string;
-  endeducationDate: string;
-  description: string;
+  end_date: string;
+  info: string;
 };
 
 interface ExperienceInputsProps {
@@ -18,10 +18,10 @@ export default function EducationInputs({
   errors,
   watch,
 }: ExperienceInputsProps) {
-  const school = watch("school");
+  const education = watch("education");
   const degree = watch("degree");
-  const endeducationDate = watch("endeducationDate");
-  const description = watch("description");
+  const end_date = watch("end_date");
+  const info = watch("info");
 
   return (
     <div className="border-b border-lightGray pb-11">
@@ -29,24 +29,24 @@ export default function EducationInputs({
       <div className="relative">
         <input
           type="text"
-          {...register("school")}
+          {...register("education")}
           placeholder="სასწავლებელი"
           className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
-            errors.school
+            errors.education
               ? "border-red-500"
-              : school && school.length >= 2
+              : education && education.length >= 2
               ? "border-green-500"
               : "border-gray-300"
           }`}
         />
-        {errors.school && (
+        {errors.education && (
           <img
             src="/images/error-icon.png"
             alt="Error"
             className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
           />
         )}
-        {school && school.length >= 2 && !errors.school && (
+        {education && education.length >= 2 && !errors.education && (
           <img
             src="/images/success-icon.png"
             alt="Success"
@@ -54,18 +54,21 @@ export default function EducationInputs({
           />
         )}
       </div>
-      {errors.school ? (
-        <p className="text-mediumRed">{errors.school.message}</p>
+      {errors.education ? (
+        <p className="text-mediumRed">{errors.education.message}</p>
       ) : null}
       <span className="text-sm font-light mt-2">მინიმუმ 2 სიმბოლო</span>
-      <div className="flex">
+      <div className="flex justify-between items-center">
         <p className="font-medium mt-3">ხარისხი</p>
+        <p className="font-medium mr-[180px]">დამთავრების თარიღი</p>
+      </div>
+      <div className="flex">
         <div className="relative">
           <input
             type="text"
             {...register("degree")}
             placeholder="ხარისხი"
-            className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
+            className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
               errors.degree
                 ? "border-red-500"
                 : degree && degree.length >= 2
@@ -87,33 +90,32 @@ export default function EducationInputs({
               className="absolute right-4 transform top-6 w-6 h-6"
             />
           )}
+          <span className="text-sm font-light mt-2">მინიმუმ 2 სიმბოლო</span>
         </div>
         {errors.degree ? (
           <p className="text-mediumRed">{errors.degree.message}</p>
         ) : null}
-        <span className="text-sm font-light mt-2">მინიმუმ 2 სიმბოლო</span>
-        <div className="mt-5">
-          <p className="font-medium">დამთავრების თარიღი</p>
+        <div className="">
           <div className="relative">
             <input
               type="date"
-              {...register("endeducationDate")}
-              className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
-                errors.endeducationDate
+              {...register("end_date")}
+              className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
+                errors.end_date
                   ? "border-red-500"
-                  : endeducationDate
+                  : end_date
                   ? "border-green-500"
                   : "border-gray-300"
               }`}
             />
-            {errors.endeducationDate && (
+            {errors.end_date && (
               <img
                 src="/images/error-icon.png"
                 alt="Error"
                 className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
               />
             )}
-            {endeducationDate && !errors.endeducationDate && (
+            {end_date && !errors.end_date && (
               <img
                 src="/images/success-icon.png"
                 alt="Success"
@@ -121,8 +123,8 @@ export default function EducationInputs({
               />
             )}
           </div>
-          {errors.endeducationDate ? (
-            <p className="text-mediumRed">{errors.endeducationDate.message}</p>
+          {errors.end_date ? (
+            <p className="text-mediumRed">{errors.end_date.message}</p>
           ) : null}
         </div>
       </div>
@@ -131,17 +133,17 @@ export default function EducationInputs({
         <p className="font-medium">აღწერა</p>
         <textarea
           placeholder="განათლების აღწერა"
-          {...register("description")}
+          {...register("info")}
           className={`w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none ${
-            errors.description
+            errors.info
               ? "border-red-500"
-              : description && description.length >= 2
+              : info && info.length >= 2
               ? "border-green-500"
               : "border-gray-300"
           }`}
         ></textarea>
-        {errors.description ? (
-          <p className="text-mediumRed">{errors.description.message}</p>
+        {errors.info ? (
+          <p className="text-mediumRed">{errors.info.message}</p>
         ) : null}
       </div>
     </div>

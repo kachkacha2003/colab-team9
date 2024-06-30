@@ -101,7 +101,10 @@ export default function ExperienceInputs({
 
       <div className="mt-5 flex justify-between">
         <div className="w-full">
-          <p className="font-medium">დაწყების რიცხვი</p>
+          <div className="flex justify-between">
+            <p className="font-medium">დაწყების რიცხვი</p>
+            <p className="font-medium mr-[186px]">დამთავრების რიცხვი</p>
+          </div>
           <div className="flex justify-between">
             <div className="relative">
               <input
