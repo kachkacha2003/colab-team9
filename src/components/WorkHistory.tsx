@@ -15,7 +15,19 @@ export default function WorkHistory({
 }: historyProps) {
   return (
     <div className="mt-5">
-      <h2 className="font-bold text-lg text-mediumRed">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
+      {positionInput ||
+      employerInput ||
+      startNumberInput ||
+      endNumberInput ||
+      descriptionInput ||
+      localStorage.getItem("position") ||
+      localStorage.getItem("employer") ||
+      localStorage.getItem("startNumber") ||
+      localStorage.getItem("endNumber") ||
+      localStorage.getItem("description") ? (
+        <h2 className="font-bold text-lg text-mediumRed">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
+      ) : null}
+
       <span className="mt-4 font-medium	">
         {positionInput}
         {!positionInput ? null : ","}
@@ -32,7 +44,7 @@ export default function WorkHistory({
           {endNumberInput ? endNumberInput.toString() : ""}
         </p>
       </div>
-      <p className="mt-4 w-[662px] border-b pb-8">{descriptionInput}</p>
+      <p className="mt-4 w-[662px] pb-8 ">{descriptionInput}</p>
     </div>
   );
 }

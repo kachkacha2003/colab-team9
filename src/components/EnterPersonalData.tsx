@@ -5,11 +5,12 @@ import * as yup from "yup";
 
 import WorkHistory from "./WorkHistory";
 import ExperienceInputs from "./ExperienceInputs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import BackButtonArrow from "../buttons/BackButtonArrow";
 import Profile from "../component/Profile";
 import NextButton from "../buttons/NextButton";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type formType = {
   position: string;
@@ -28,13 +29,13 @@ const schema = yup.object({
 });
 
 export default function EnterPersonalData() {
-  const [count, setCount] = useState(1);
-
+  const location = useLocation();
+  const { state } = location;
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm<formType>({
     resolver: yupResolver(schema),
@@ -42,8 +43,7 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
-
-    reset();
+    navigate("/educationInfo");
   };
 
   const positionInput = watch("position");
@@ -51,6 +51,30 @@ export default function EnterPersonalData() {
   const startNumberInput = watch("startNumber");
   const endNumberInput = watch("endNumber");
   const descriptionInput = watch("description");
+
+  useEffect(() => {
+    if (positionInput) {
+      localStorage.setItem("position", positionInput);
+    }
+    if (employerInput) {
+      localStorage.setItem("employer", employerInput);
+    }
+    if (startNumberInput) {
+      localStorage.setItem("startNumber", startNumberInput);
+    }
+    if (endNumberInput) {
+      localStorage.setItem("endNumber", endNumberInput);
+    }
+    if (descriptionInput) {
+      localStorage.setItem("description", descriptionInput);
+    }
+  }, [
+    positionInput,
+    employerInput,
+    startNumberInput,
+    endNumberInput,
+    descriptionInput,
+  ]);
 
   return (
     <div className="flex">
@@ -67,48 +91,46 @@ export default function EnterPersonalData() {
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
-              {[...Array(count)].map((_, index) => (
-                <ExperienceInputs
-                  key={index}
-                  register={register}
-                  errors={errors}
-                  positionInput={positionInput}
-                  employerInput={employerInput}
-                  startNumberInput={startNumberInput}
-                  endNumberInput={endNumberInput}
-                  descriptionInput={descriptionInput}
-                />
-              ))}
+              <ExperienceInputs
+                register={register}
+                errors={errors}
+                positionInput={positionInput}
+                employerInput={employerInput}
+                startNumberInput={startNumberInput}
+                endNumberInput={endNumberInput}
+                descriptionInput={descriptionInput}
+              />
               <div className="mt-10">
-                <Button
-                  count={count}
-                  setCount={setCount}
-                  type="button"
-                  variant="secondary"
-                >
+                <Button type="button" variant="secondary">
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
-              <div className="">
-                <div className="mt-[115px] flex justify-between pb-[65px]">
-                  <Button to={"/privateInfo"} variant="outline" size="large">
-                    ᲣᲙᲐᲜ
-                  </Button>
-                  <NextButton />
-                </div>
+
+              <div className="mt-[115px] flex justify-between pb-[65px]">
+                <Button to={"/privateInfo"} variant="outline" size="large">
+                  ᲣᲙᲐᲜ
+                </Button>
+                <NextButton />
               </div>
             </form>
           </div>
         </div>
       </div>
-
-      <WorkHistory
-        positionInput={positionInput}
-        employerInput={employerInput}
-        startNumberInput={startNumberInput}
-        endNumberInput={endNumberInput}
-        descriptionInput={descriptionInput}
-      />
+      <div className="flex flex-col">
+        <Profile
+          positionInput={positionInput}
+          employerInput={employerInput}
+          startNumberInput={startNumberInput}
+          endNumberInput={endNumberInput}
+          descriptionInput={descriptionInput}
+          name={state.name}
+          last_name={state.last_name}
+          bio={state.bio}
+          files={state.files}
+          email={state.email}
+          number={state.number}
+        />
+      </div>
     </div>
   );
 }

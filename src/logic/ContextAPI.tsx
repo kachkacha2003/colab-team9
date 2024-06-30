@@ -27,7 +27,7 @@ function ContextAPI() {
     email: "",
     number: "",
   });
-  console.log(mainInfo);
+
   return (
     <>
       <GlobalAPI.Provider value={{ mainInfo, setMainInfo }}>
