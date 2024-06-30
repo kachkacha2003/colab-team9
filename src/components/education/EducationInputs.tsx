@@ -1,58 +1,52 @@
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
 
 type InputType = {
-  position: string;
-  employer: string;
-  startNumber: string;
-  endNumber: string;
+  school: string;
+  degree: string;
+  endeducationDate: string;
   description: string;
 };
-
-//input file
 
 interface ExperienceInputsProps {
   register: UseFormRegister<InputType>;
   errors: FieldErrors<InputType>;
-  positionInput: string;
-  employerInput: string;
-  startNumberInput: string;
-  endNumberInput: string;
-  descriptionInput: string;
+  watch: UseFormWatch<InputType>;
 }
 
 export default function EducationInputs({
   register,
   errors,
-  positionInput,
-  employerInput,
-  startNumberInput,
-  endNumberInput,
-  descriptionInput,
+  watch,
 }: ExperienceInputsProps) {
+  const school = watch("school");
+  const degree = watch("degree");
+  const endeducationDate = watch("endeducationDate");
+  const description = watch("description");
+
   return (
     <div className="border-b border-lightGray pb-11">
-      <p className="font-medium">თანამდებობა</p>
+      <p className="font-medium">სასწავლებელი</p>
       <div className="relative">
         <input
           type="text"
-          {...register("position")}
-          placeholder="დეველოპერი, დიზაინერი, ა.შ."
+          {...register("school")}
+          placeholder="სასწავლებელი"
           className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
-            errors.position
+            errors.school
               ? "border-red-500"
-              : positionInput && positionInput.length >= 2
+              : school && school.length >= 2
               ? "border-green-500"
               : "border-gray-300"
           }`}
         />
-        {errors.position && (
+        {errors.school && (
           <img
             src="/images/error-icon.png"
             alt="Error"
             className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
           />
         )}
-        {positionInput && positionInput.length >= 2 && !errors.position && (
+        {school && school.length >= 2 && !errors.school && (
           <img
             src="/images/success-icon.png"
             alt="Success"
@@ -60,111 +54,88 @@ export default function EducationInputs({
           />
         )}
       </div>
-      {errors.position ? (
-        <p className="text-mediumRed">{errors.position.message}</p>
+      {errors.school ? (
+        <p className="text-mediumRed">{errors.school.message}</p>
       ) : null}
-      <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
-
-      <p className="font-medium mt-3">დამსაქმებელი</p>
-      <div className="relative">
-        <input
-          type="text"
-          {...register("employer")}
-          placeholder="დამსაქმებელი"
-          className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
-            errors.employer
-              ? "border-red-500"
-              : employerInput && employerInput.length >= 2
-              ? "border-green-500"
-              : "border-gray-300"
-          }`}
-        />
-        {errors.employer && (
-          <img
-            src="/images/error-icon.png"
-            alt="Error"
-            className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
+      <span className="text-sm font-light mt-2">მინიმუმ 2 სიმბოლო</span>
+      <div className="flex">
+        <p className="font-medium mt-3">ხარისხი</p>
+        <div className="relative">
+          <input
+            type="text"
+            {...register("degree")}
+            placeholder="ხარისხი"
+            className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
+              errors.degree
+                ? "border-red-500"
+                : degree && degree.length >= 2
+                ? "border-green-500"
+                : "border-gray-300"
+            }`}
           />
-        )}
-        {employerInput && employerInput.length >= 2 && !errors.employer && (
-          <img
-            src="/images/success-icon.png"
-            alt="Success"
-            className="absolute right-4 transform top-6 w-6 h-6"
-          />
-        )}
-      </div>
-      {errors.employer ? (
-        <p className="text-mediumRed">{errors.employer.message}</p>
-      ) : null}
-      <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
-
-      <div className="mt-5 flex justify-between">
-        <div className="w-full">
-          <p className="font-medium">დაწყების რიცხვი</p>
-          <div className="flex justify-between">
-            <div className="relative">
-              <input
-                type="date"
-                {...register("startNumber")}
-                placeholder="mm / dd / yyyy"
-                className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
-                  errors.startNumber
-                    ? "border-red-500"
-                    : startNumberInput &&
-                      endNumberInput &&
-                      new Date(startNumberInput) < new Date(endNumberInput)
-                    ? "border-green-500"
-                    : startNumberInput && endNumberInput
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
-              />
-              {errors.startNumber ? (
-                <p className="text-mediumRed">{errors.startNumber.message}</p>
-              ) : null}
-            </div>
-            <div className="relative">
-              <input
-                type="date"
-                {...register("endNumber")}
-                placeholder="mm / dd / yyyy"
-                className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
-                  errors.endNumber
-                    ? "border-red-500"
-                    : startNumberInput &&
-                      endNumberInput &&
-                      new Date(startNumberInput) < new Date(endNumberInput)
-                    ? "border-green-500"
-                    : startNumberInput && endNumberInput
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
-              />
-              {errors.endNumber ? (
-                <p className="text-mediumRed">{errors.endNumber.message}</p>
-              ) : null}
-            </div>
-          </div>
-          {startNumberInput && endNumberInput && (
-            <p className="mt-2 text-red-500">
-              {new Date(startNumberInput) < new Date(endNumberInput)
-                ? ""
-                : "დაწყების თარიღი მეტია ან ტოლია დასრულების თარიღზე"}
-            </p>
+          {errors.degree && (
+            <img
+              src="/images/error-icon.png"
+              alt="Error"
+              className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
+            />
           )}
+          {degree && degree.length >= 2 && !errors.degree && (
+            <img
+              src="/images/success-icon.png"
+              alt="Success"
+              className="absolute right-4 transform top-6 w-6 h-6"
+            />
+          )}
+        </div>
+        {errors.degree ? (
+          <p className="text-mediumRed">{errors.degree.message}</p>
+        ) : null}
+        <span className="text-sm font-light mt-2">მინიმუმ 2 სიმბოლო</span>
+        <div className="mt-5">
+          <p className="font-medium">დამთავრების თარიღი</p>
+          <div className="relative">
+            <input
+              type="date"
+              {...register("endeducationDate")}
+              className={`w-full px-4 py-[14px] mt-2 border outline-none rounded ${
+                errors.endeducationDate
+                  ? "border-red-500"
+                  : endeducationDate
+                  ? "border-green-500"
+                  : "border-gray-300"
+              }`}
+            />
+            {errors.endeducationDate && (
+              <img
+                src="/images/error-icon.png"
+                alt="Error"
+                className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
+              />
+            )}
+            {endeducationDate && !errors.endeducationDate && (
+              <img
+                src="/images/success-icon.png"
+                alt="Success"
+                className="absolute right-4 transform top-6 w-6 h-6"
+              />
+            )}
+          </div>
+          {errors.endeducationDate ? (
+            <p className="text-mediumRed">{errors.endeducationDate.message}</p>
+          ) : null}
         </div>
       </div>
 
       <div className="w-full mt-5">
         <p className="font-medium">აღწერა</p>
         <textarea
-          placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
+          placeholder="განათლების აღწერა"
           {...register("description")}
           className={`w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none ${
             errors.description
               ? "border-red-500"
-              : descriptionInput && descriptionInput.length >= 2
+              : description && description.length >= 2
               ? "border-green-500"
               : "border-gray-300"
           }`}

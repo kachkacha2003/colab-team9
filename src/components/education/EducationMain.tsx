@@ -12,18 +12,16 @@ import BackButtonArrow from "../../buttons/BackButtonArrow";
 
 // ზედა და ქვედა ნაწილი
 type formType = {
-  position: string;
-  employer: string;
-  startNumber: string;
-  endNumber: string;
+  school: string;
+  degree: string;
+  endeducationDate: string;
   description: string;
 };
 
 const schema = yup.object({
-  position: yup.string().min(2, "").required("სავალდებულო ველი"),
-  employer: yup.string().min(2, "").required("სავალდებულო ველი"),
-  startNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
-  endNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
+  school: yup.string().min(2, "").required("სავალდებულო ველი"),
+  degree: yup.string().min(2, "").required("სავალდებულო ველი"),
+  endeducationDate: yup.string().required("სავალდებულო ველი"),
   description: yup.string().min(2, "").required("სავალდებულო ველი"),
 });
 
@@ -45,10 +43,9 @@ export default function EducationMain() {
     reset();
   };
 
-  const positionInput = watch("position");
-  const employerInput = watch("employer");
-  const startNumberInput = watch("startNumber");
-  const endNumberInput = watch("endNumber");
+  const schoolInput = watch("school");
+  const degreeInput = watch("degree");
+  const endeducationDateInput = watch("endeducationDate");
   const descriptionInput = watch("description");
 
   return (
@@ -71,11 +68,7 @@ export default function EducationMain() {
                   key={index}
                   register={register}
                   errors={errors}
-                  positionInput={positionInput}
-                  employerInput={employerInput}
-                  startNumberInput={startNumberInput}
-                  endNumberInput={endNumberInput}
-                  descriptionInput={descriptionInput}
+                  watch={watch}
                 />
               ))}
               <div className="mt-10">
@@ -108,10 +101,9 @@ export default function EducationMain() {
       </div>
 
       <EducationHistory
-        positionInput={positionInput}
-        employerInput={employerInput}
-        startNumberInput={startNumberInput}
-        endNumberInput={endNumberInput}
+        schoolInput={schoolInput}
+        degreeInput={degreeInput}
+        endeducationDateInput={endeducationDateInput}
         descriptionInput={descriptionInput}
       />
     </div>
