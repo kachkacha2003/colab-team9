@@ -9,7 +9,7 @@ import { useState } from "react";
 
 import BackButtonArrow from "../buttons/BackButtonArrow";
 import Profile from "../component/Profile";
-
+import NextButton from "../buttons/NextButton";
 
 type formType = {
   position: string;
@@ -42,6 +42,7 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
+
     reset();
   };
 
@@ -55,7 +56,6 @@ export default function EnterPersonalData() {
     <div className="flex">
       <div className="bg-gray-100">
         <div className="flex pl-12 pt-12 pr-32 ">
-
           <BackButtonArrow location="/privateInfo" />
 
           <div className="ml-16 w-[798px]">
@@ -80,31 +80,21 @@ export default function EnterPersonalData() {
                 />
               ))}
               <div className="mt-10">
-
                 <Button
                   count={count}
                   setCount={setCount}
                   type="button"
                   variant="secondary"
                 >
-
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
-
-                  <Button type="button" variant="outline" size="large">
+                  <Button to={"/privateInfo"} variant="outline" size="large">
                     ᲣᲙᲐᲜ
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="large"
-                    onClick={handleSubmit(onSubmit)}
-                  >
-
-                    შემდეგი
-                  </Button>
+                  <NextButton />
                 </div>
               </div>
             </form>
@@ -119,7 +109,6 @@ export default function EnterPersonalData() {
         endNumberInput={endNumberInput}
         descriptionInput={descriptionInput}
       />
-
     </div>
   );
 }

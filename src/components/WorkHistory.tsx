@@ -13,8 +13,6 @@ export default function WorkHistory({
   endNumberInput,
   descriptionInput,
 }: historyProps) {
-  console.log(startNumberInput);
-
   return (
     <div className="mt-5">
       <h2 className="font-bold text-lg text-mediumRed">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>

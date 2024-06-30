@@ -5,21 +5,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   size?: "small" | "medium" | "large";
   isRound?: boolean;
-
-  setCount?: React.Dispatch<React.SetStateAction<number>>;
-  count?: number;
-}
-
-const Button: React.FC<ButtonProps> = ({
-  setCount,
-  count,
-
   location: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   location,
-
   children,
   variant = "primary",
   size = "medium",
@@ -46,21 +36,10 @@ const Button: React.FC<ButtonProps> = ({
 
   const classes = `${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  const handleClick = () => {
-    if (setCount && count !== undefined) {
-      setCount(count + 1);
-    }
-  };
-
   return (
-
-    <button onClick={handleClick} className={classes} {...props}>
-
     <Link to={location} className={classes} {...props}>
-
       {children}
     </Link>
-      </button>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface HomePageProps {}
 
@@ -14,12 +15,14 @@ const HomePage: React.FC<HomePageProps> = () => {
             <div className="relative top-[50px] left-[90%]">
               <img src="/images/LOGO-40.png" alt="" />
             </div>
-            <button
+
+            <Link
+              to={"/privateInfo"}
               type="button"
-              className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-black text-white px-12 py-3 rounded-lg transition duration-300 w-[466px] active:outline-none"
+              className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-black text-white h-[60px] flex justify-center items-center  rounded-lg transition duration-300 w-[466px] active:outline-none"
             >
               ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ
-            </button>
+            </Link>
           </div>
         </div>
       </div>
