@@ -1,33 +1,32 @@
-import Button from "./Button";
+import Button from "../Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import WorkHistory from "./WorkHistory";
-import ExperienceInputs from "./ExperienceInputs";
+import EducationHistory from "../education/EducationHistory";
+import EducationInputs from "../education/EducationInputs";
 import { useState } from "react";
 
-import BackButtonArrow from "../buttons/BackButtonArrow";
-import Profile from "../component/Profile";
+import BackButtonArrow from "../../buttons/BackButtonArrow";
+import Popup from "../Popup";
+// import Profile from "../../component/Profile";
 
-
+// ზედა და ქვედა ნაწილი
 type formType = {
-  position: string;
-  employer: string;
-  startNumber: string;
-  endNumber: string;
-  description: string;
+  education: string;
+  degree: string;
+  end_date: string;
+  info: string;
 };
 
 const schema = yup.object({
-  position: yup.string().min(2, "").required("სავალდებულო ველი"),
-  employer: yup.string().min(2, "").required("სავალდებულო ველი"),
-  startNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
-  endNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
-  description: yup.string().min(2, "").required("სავალდებულო ველი"),
+  education: yup.string().min(2, "").required("სავალდებულო ველი"),
+  degree: yup.string().min(2, "").required("სავალდებულო ველი"),
+  end_date: yup.string().required("სავალდებულო ველი"),
+  info: yup.string().min(2, "").required("სავალდებულო ველი"),
 });
 
-export default function EnterPersonalData() {
+export default function EducationMain() {
   const [count, setCount] = useState(1);
 
   const {
@@ -45,55 +44,46 @@ export default function EnterPersonalData() {
     reset();
   };
 
-  const positionInput = watch("position");
-  const employerInput = watch("employer");
-  const startNumberInput = watch("startNumber");
-  const endNumberInput = watch("endNumber");
-  const descriptionInput = watch("description");
+  const educationInput = watch("education");
+  const degreeInput = watch("degree");
+  const end_dateInput = watch("end_date");
+  const infoInput = watch("info");
 
   return (
     <div className="flex">
       <div className="bg-gray-100">
         <div className="flex pl-12 pt-12 pr-32 ">
-
           <BackButtonArrow location="/privateInfo" />
 
           <div className="ml-16 w-[798px]">
             <div className=" flex justify-between border-b border-black">
-              <span className="text-2xl	font-bold">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</span>
-              <span className="text-xl">2/3</span>
+              <span className="text-2xl	font-bold">ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</span>
+              <span className="text-xl">3/3</span>
             </div>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
               {[...Array(count)].map((_, index) => (
-                <ExperienceInputs
+                <EducationInputs
                   key={index}
                   register={register}
                   errors={errors}
-                  positionInput={positionInput}
-                  employerInput={employerInput}
-                  startNumberInput={startNumberInput}
-                  endNumberInput={endNumberInput}
-                  descriptionInput={descriptionInput}
+                  watch={watch}
                 />
               ))}
               <div className="mt-10">
-
                 <Button
                   count={count}
                   setCount={setCount}
                   type="button"
                   variant="secondary"
                 >
-
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
-
                   <Button type="button" variant="outline" size="large">
                     ᲣᲙᲐᲜ
                   </Button>
@@ -102,24 +92,22 @@ export default function EnterPersonalData() {
                     size="large"
                     onClick={handleSubmit(onSubmit)}
                   >
-
                     შემდეგი
                   </Button>
                 </div>
               </div>
             </form>
+            <Popup />
           </div>
         </div>
       </div>
 
-      <WorkHistory
-        positionInput={positionInput}
-        employerInput={employerInput}
-        startNumberInput={startNumberInput}
-        endNumberInput={endNumberInput}
-        descriptionInput={descriptionInput}
+      <EducationHistory
+        educationInput={educationInput}
+        degreeInput={degreeInput}
+        end_dateInput={end_dateInput}
+        infoInput={infoInput}
       />
-
     </div>
   );
 }

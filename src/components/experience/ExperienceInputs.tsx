@@ -3,19 +3,21 @@ import { UseFormRegister, FieldErrors } from "react-hook-form";
 type InputType = {
   position: string;
   employer: string;
-  startNumber: string;
-  endNumber: string;
-  description: string;
+  start_date: string;
+  end_date: string;
+  info: string;
 };
+
+//input file
 
 interface ExperienceInputsProps {
   register: UseFormRegister<InputType>;
   errors: FieldErrors<InputType>;
   positionInput: string;
   employerInput: string;
-  startNumberInput: string;
-  endNumberInput: string;
-  descriptionInput: string;
+  start_dateInput: string;
+  end_dateInput: string;
+  infoInput: string;
 }
 
 export default function ExperienceInputs({
@@ -23,9 +25,9 @@ export default function ExperienceInputs({
   errors,
   positionInput,
   employerInput,
-  startNumberInput,
-  endNumberInput,
-  descriptionInput,
+  start_dateInput,
+  end_dateInput,
+  infoInput,
 }: ExperienceInputsProps) {
   return (
     <div className="border-b border-lightGray pb-11">
@@ -99,54 +101,57 @@ export default function ExperienceInputs({
 
       <div className="mt-5 flex justify-between">
         <div className="w-full">
-          <p className="font-medium">დაწყების რიცხვი</p>
+          <div className="flex justify-between">
+            <p className="font-medium">დაწყების რიცხვი</p>
+            <p className="font-medium mr-[186px]">დამთავრების რიცხვი</p>
+          </div>
           <div className="flex justify-between">
             <div className="relative">
               <input
                 type="date"
-                {...register("startNumber")}
+                {...register("start_date")}
                 placeholder="mm / dd / yyyy"
                 className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
-                  errors.startNumber
+                  errors.start_date
                     ? "border-red-500"
-                    : startNumberInput &&
-                      endNumberInput &&
-                      new Date(startNumberInput) < new Date(endNumberInput)
+                    : start_dateInput &&
+                      end_dateInput &&
+                      new Date(start_dateInput) < new Date(end_dateInput)
                     ? "border-green-500"
-                    : startNumberInput && endNumberInput
+                    : start_dateInput && end_dateInput
                     ? "border-red-500"
                     : "border-gray-300"
                 }`}
               />
-              {errors.startNumber ? (
-                <p className="text-mediumRed">{errors.startNumber.message}</p>
+              {errors.start_date ? (
+                <p className="text-mediumRed">{errors.start_date.message}</p>
               ) : null}
             </div>
             <div className="relative">
               <input
                 type="date"
-                {...register("endNumber")}
+                {...register("end_date")}
                 placeholder="mm / dd / yyyy"
                 className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
-                  errors.endNumber
+                  errors.end_date
                     ? "border-red-500"
-                    : startNumberInput &&
-                      endNumberInput &&
-                      new Date(startNumberInput) < new Date(endNumberInput)
+                    : start_dateInput &&
+                      end_dateInput &&
+                      new Date(start_dateInput) < new Date(end_dateInput)
                     ? "border-green-500"
-                    : startNumberInput && endNumberInput
+                    : start_dateInput && end_dateInput
                     ? "border-red-500"
                     : "border-gray-300"
                 }`}
               />
-              {errors.endNumber ? (
-                <p className="text-mediumRed">{errors.endNumber.message}</p>
+              {errors.end_date ? (
+                <p className="text-mediumRed">{errors.end_date.message}</p>
               ) : null}
             </div>
           </div>
-          {startNumberInput && endNumberInput && (
+          {start_dateInput && end_dateInput && (
             <p className="mt-2 text-red-500">
-              {new Date(startNumberInput) < new Date(endNumberInput)
+              {new Date(start_dateInput) < new Date(end_dateInput)
                 ? ""
                 : "დაწყების თარიღი მეტია ან ტოლია დასრულების თარიღზე"}
             </p>
@@ -158,17 +163,17 @@ export default function ExperienceInputs({
         <p className="font-medium">აღწერა</p>
         <textarea
           placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
-          {...register("description")}
+          {...register("info")}
           className={`w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none ${
-            errors.description
+            errors.info
               ? "border-red-500"
-              : descriptionInput && descriptionInput.length >= 2
+              : infoInput && infoInput.length >= 2
               ? "border-green-500"
               : "border-gray-300"
           }`}
         ></textarea>
-        {errors.description ? (
-          <p className="text-mediumRed">{errors.description.message}</p>
+        {errors.info ? (
+          <p className="text-mediumRed">{errors.info.message}</p>
         ) : null}
       </div>
     </div>
