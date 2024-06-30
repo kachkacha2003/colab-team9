@@ -14,17 +14,17 @@ import BackButtonArrow from "../../buttons/BackButtonArrow";
 type formType = {
   position: string;
   employer: string;
-  startNumber: string;
-  endNumber: string;
-  description: string;
+  start_date: string;
+  end_date: string;
+  info: string;
 };
 
 const schema = yup.object({
   position: yup.string().min(2, "").required("სავალდებულო ველი"),
   employer: yup.string().min(2, "").required("სავალდებულო ველი"),
-  startNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
-  endNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
-  description: yup.string().min(2, "").required("სავალდებულო ველი"),
+  start_date: yup.string().min(2, "").required("სავალდებულო ველი"),
+  end_date: yup.string().min(2, "").required("სავალდებულო ველი"),
+  info: yup.string().min(2, "").required("სავალდებულო ველი"),
 });
 
 export default function EnterPersonalData() {
@@ -47,9 +47,9 @@ export default function EnterPersonalData() {
 
   const positionInput = watch("position");
   const employerInput = watch("employer");
-  const startNumberInput = watch("startNumber");
-  const endNumberInput = watch("endNumber");
-  const descriptionInput = watch("description");
+  const start_dateInput = watch("start_date");
+  const end_dateInput = watch("end_date");
+  const infoInput = watch("info");
 
   return (
     <div className="flex">
@@ -73,9 +73,9 @@ export default function EnterPersonalData() {
                   errors={errors}
                   positionInput={positionInput}
                   employerInput={employerInput}
-                  startNumberInput={startNumberInput}
-                  endNumberInput={endNumberInput}
-                  descriptionInput={descriptionInput}
+                  start_dateInput={start_dateInput}
+                  end_dateInput={end_dateInput}
+                  infoInput={infoInput}
                 />
               ))}
               <div className="mt-10">
@@ -110,9 +110,9 @@ export default function EnterPersonalData() {
       <WorkHistory
         positionInput={positionInput}
         employerInput={employerInput}
-        startNumberInput={startNumberInput}
-        endNumberInput={endNumberInput}
-        descriptionInput={descriptionInput}
+        start_dateInput={start_dateInput}
+        end_dateInput={end_dateInput}
+        infoInput={infoInput}
       />
     </div>
   );
