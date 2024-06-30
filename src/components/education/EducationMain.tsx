@@ -8,6 +8,7 @@ import EducationInputs from "../education/EducationInputs";
 import { useState } from "react";
 
 import BackButtonArrow from "../../buttons/BackButtonArrow";
+import Popup from "../Popup";
 // import Profile from "../../component/Profile";
 
 // ზედა და ქვედა ნაწილი
@@ -96,6 +97,7 @@ export default function EducationMain() {
                 </div>
               </div>
             </form>
+            <Popup />
           </div>
         </div>
       </div>
