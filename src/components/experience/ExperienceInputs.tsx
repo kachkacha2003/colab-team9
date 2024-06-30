@@ -34,6 +34,12 @@ export default function ExperienceInputs({
       <p className="font-medium">თანამდებობა</p>
       <div className="relative">
         <input
+          defaultValue={
+            localStorage.getItem("position") !== "undefined" &&
+            localStorage.getItem("position") !== null
+              ? localStorage.getItem("position") || ""
+              : ""
+          }
           type="text"
           {...register("position")}
           placeholder="დეველოპერი, დიზაინერი, ა.შ."
@@ -68,6 +74,12 @@ export default function ExperienceInputs({
       <p className="font-medium mt-3">დამსაქმებელი</p>
       <div className="relative">
         <input
+          defaultValue={
+            localStorage.getItem("employer") !== "undefined" &&
+            localStorage.getItem("employer") !== null
+              ? localStorage.getItem("employer") || ""
+              : ""
+          }
           type="text"
           {...register("employer")}
           placeholder="დამსაქმებელი"
@@ -108,6 +120,12 @@ export default function ExperienceInputs({
           <div className="flex justify-between">
             <div className="relative">
               <input
+                defaultValue={
+                  localStorage.getItem("startNumber") !== "undefined" &&
+                  localStorage.getItem("startNumber") !== null
+                    ? localStorage.getItem("startNumber") || ""
+                    : ""
+                }
                 type="date"
                 {...register("start_date")}
                 placeholder="mm / dd / yyyy"
@@ -129,6 +147,12 @@ export default function ExperienceInputs({
             </div>
             <div className="relative">
               <input
+                defaultValue={
+                  localStorage.getItem("endNumber") !== "undefined" &&
+                  localStorage.getItem("endNumber") !== null
+                    ? localStorage.getItem("endNumber") || ""
+                    : ""
+                }
                 type="date"
                 {...register("end_date")}
                 placeholder="mm / dd / yyyy"
@@ -162,6 +186,12 @@ export default function ExperienceInputs({
       <div className="w-full mt-5">
         <p className="font-medium">აღწერა</p>
         <textarea
+          defaultValue={
+            localStorage.getItem("description") !== "undefined" &&
+            localStorage.getItem("description") !== null
+              ? localStorage.getItem("description") || ""
+              : ""
+          }
           placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
           {...register("info")}
           className={`w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none ${

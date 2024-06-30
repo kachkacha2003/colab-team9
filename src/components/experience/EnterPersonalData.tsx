@@ -2,13 +2,12 @@ import Button from "../Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-import WorkHistory from "./WorkHistory";
 import ExperienceInputs from "./ExperienceInputs";
-import { useState } from "react";
-
-import BackButtonArrow from "../../buttons/BackButtonArrow";
-// import Profile from "../../component/Profile";
+import { useContext, useEffect, useState } from "react";
+import BackButtonArrow from "../buttons/BackButtonArrow";
+import Profile from "../component/Profile";
+import { useLocation, useNavigate } from "react-router-dom";
+import { GlobalAPI } from "../logic/ContextAPI";
 
 // ზედა და ქვედა ნაწილი
 type formType = {
@@ -28,13 +27,14 @@ const schema = yup.object({
 });
 
 export default function EnterPersonalData() {
-  const [count, setCount] = useState(1);
-
+  const location = useLocation();
+  const { state } = location;
+  const navigate = useNavigate();
+  const { setExperience } = useContext(GlobalAPI);
   const {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm<formType>({
     resolver: yupResolver(schema),
@@ -42,7 +42,8 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
-    reset();
+    setExperience(data);
+    navigate("/educationInfo");
   };
 
   const positionInput = watch("position");
@@ -50,6 +51,24 @@ export default function EnterPersonalData() {
   const start_dateInput = watch("start_date");
   const end_dateInput = watch("end_date");
   const infoInput = watch("info");
+
+  useEffect(() => {
+    if (positionInput) {
+      localStorage.setItem("position", positionInput);
+    }
+    if (employerInput) {
+      localStorage.setItem("employer", employerInput);
+    }
+    if (start_dateInput) {
+      localStorage.setItem("startNumber", start_dateInput);
+    }
+    if (end_dateInput) {
+      localStorage.setItem("endNumber", end_dateInput);
+    }
+    if (infoInput) {
+      localStorage.setItem("description", infoInput);
+    }
+  }, [positionInput, employerInput, start_dateInput, end_dateInput, infoInput]);
 
   return (
     <div className="flex">
@@ -105,6 +124,22 @@ export default function EnterPersonalData() {
             </form>
           </div>
         </div>
+      </div>
+
+      <div className="flex flex-col">
+        <Profile
+          positionInput={positionInput}
+          employerInput={employerInput}
+          start_dateInput={start_dateInput}
+          end_dateInput={end_dateInput}
+          infoInput={infoInput}
+          name={state.name}
+          last_name={state.last_name}
+          bio={state.bio}
+          files={state.files}
+          email={state.email}
+          number={state.number}
+        />
       </div>
 
       <WorkHistory

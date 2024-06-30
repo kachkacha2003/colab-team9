@@ -1,9 +1,17 @@
 import React, { createContext, useState } from "react";
 import App from "../App";
-
+type Texp = {
+  position: string;
+  employer: string;
+  startNumber: string;
+  endNumber: string;
+  description: string;
+};
 type TMainInfo = {
   mainInfo: Inputs;
   setMainInfo: React.Dispatch<React.SetStateAction<Inputs>>;
+  experience: Texp;
+  setExperience: React.Dispatch<React.SetStateAction<Texp>>;
 };
 
 export const GlobalAPI = createContext<TMainInfo>({
@@ -16,6 +24,14 @@ export const GlobalAPI = createContext<TMainInfo>({
     number: "",
   },
   setMainInfo: () => {},
+  experience: {
+    position: "",
+    employer: "",
+    startNumber: "",
+    endNumber: "",
+    description: "",
+  },
+  setExperience: () => {},
 });
 
 function ContextAPI() {
@@ -27,10 +43,19 @@ function ContextAPI() {
     email: "",
     number: "",
   });
-  console.log(mainInfo);
+  const [experience, setExperience] = useState({
+    position: "",
+    employer: "",
+    startNumber: "",
+    endNumber: "",
+    description: "",
+  });
+  console.log(experience);
   return (
     <>
-      <GlobalAPI.Provider value={{ mainInfo, setMainInfo }}>
+      <GlobalAPI.Provider
+        value={{ mainInfo, setMainInfo, experience, setExperience }}
+      >
         <App />
       </GlobalAPI.Provider>
     </>

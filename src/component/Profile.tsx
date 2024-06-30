@@ -1,10 +1,38 @@
 import mail from "/images/email.svg";
 import telphone from "/images/phone.svg";
 import logo from "/images/LOGO-12.png";
-function Profile({ name, last_name, number, bio, files, email }: Inputs) {
+import WorkHistory from "../components/WorkHistory";
+
+type TProfile = {
+  name: string;
+  last_name: string;
+  number: string;
+  bio: string;
+  files: string;
+  email: string;
+  positionInput: string;
+  employerInput: string;
+  start_dateInput: string;
+  end_dateInput: string;
+  infoInput: string;
+};
+
+function Profile({
+  name,
+  last_name,
+  number,
+  bio,
+  files,
+  email,
+  positionInput,
+  employerInput,
+  start_dateInput,
+  end_dateInput,
+  infoInput,
+}: TProfile) {
   return (
-    <div className="ml-[80px] relative min-w-[622px] ">
-      <div className="flex  ">
+    <div className="ml-[80px] relative min-w-[622px] h-screen ">
+      <div className="flex ">
         <div className="w-[400px] mt-[68px] ">
           <h1 className="text-mediumRed text-4xl font-bold flex 	">
             {name
@@ -20,9 +48,9 @@ function Profile({ name, last_name, number, bio, files, email }: Inputs) {
               : null}
           </h1>
           <div className="flex mt-[17px]">
-            {localStorage.getItem("email") && (
+            {localStorage.getItem("email") || email ? (
               <img src={mail} alt="email icon" />
-            )}
+            ) : null}
             <address className="text-lg ml-[10px]	">
               {email
                 ? email
@@ -32,9 +60,9 @@ function Profile({ name, last_name, number, bio, files, email }: Inputs) {
             </address>
           </div>
           <div className="flex mt-[10px]">
-            {localStorage.getItem("number") && (
+            {localStorage.getItem("number") || number ? (
               <img src={telphone} alt="number icon" />
-            )}
+            ) : null}
             <address className="text-lg ml-[10px]">
               {number
                 ? number
@@ -44,11 +72,11 @@ function Profile({ name, last_name, number, bio, files, email }: Inputs) {
             </address>
           </div>
           <div className="mt-[34px]  ">
-            {localStorage.getItem("bio") && (
+            {localStorage.getItem("bio") || bio ? (
               <h4 className="text-mediumRed text-[18px] 	font-bold ">
                 ჩემ შესახებ
               </h4>
-            )}
+            ) : null}
             <p className="mt-[15px] break-words">
               {bio
                 ? bio
@@ -82,6 +110,13 @@ function Profile({ name, last_name, number, bio, files, email }: Inputs) {
       localStorage.getItem("number") ? (
         <hr className="w-full h-[1px] bg-lightGray "></hr>
       ) : null}
+      <WorkHistory
+        positionInput={positionInput}
+        employerInput={employerInput}
+        start_dateInput={start_dateInput}
+        end_dateInput={end_dateInput}
+        infoInput={infoInput}
+      />
       <img className="absolute bottom-[20px]" src={logo} alt="Logo" />
     </div>
   );

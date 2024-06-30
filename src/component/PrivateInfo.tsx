@@ -74,7 +74,9 @@ function PrivateInfo() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     setMainInfo(data);
-    navigate("/experienceInfo");
+    navigate("/experienceInfo", {
+      state: data,
+    });
   };
 
   useEffect(() => {
