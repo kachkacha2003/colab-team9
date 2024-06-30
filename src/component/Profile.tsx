@@ -12,9 +12,9 @@ type TProfile = {
   email: string;
   positionInput: string;
   employerInput: string;
-  startNumberInput: string;
-  endNumberInput: string;
-  descriptionInput: string;
+  start_dateInput: string;
+  end_dateInput: string;
+  infoInput: string;
 };
 
 function Profile({
@@ -26,9 +26,9 @@ function Profile({
   email,
   positionInput,
   employerInput,
-  startNumberInput,
-  endNumberInput,
-  descriptionInput,
+  start_dateInput,
+  end_dateInput,
+  infoInput,
 }: TProfile) {
   return (
     <div className="ml-[80px] relative min-w-[622px] h-screen ">
@@ -113,9 +113,9 @@ function Profile({
       <WorkHistory
         positionInput={positionInput}
         employerInput={employerInput}
-        startNumberInput={startNumberInput}
-        endNumberInput={endNumberInput}
-        descriptionInput={descriptionInput}
+        start_dateInput={start_dateInput}
+        end_dateInput={end_dateInput}
+        infoInput={infoInput}
       />
       <img className="absolute bottom-[20px]" src={logo} alt="Logo" />
     </div>

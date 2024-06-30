@@ -1,17 +1,19 @@
 type historyProps = {
   positionInput: string;
   employerInput: string;
-  startNumberInput: string;
-  endNumberInput: string;
-  descriptionInput: string;
+  start_dateInput: string;
+  end_dateInput: string;
+  infoInput: string;
 };
+
+//მარჯვენა მხარე
 
 export default function WorkHistory({
   positionInput,
   employerInput,
-  startNumberInput,
-  endNumberInput,
-  descriptionInput,
+  start_dateInput,
+  end_dateInput,
+  infoInput,
 }: historyProps) {
   return (
     <div className="mt-5">
