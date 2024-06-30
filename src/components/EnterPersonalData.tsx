@@ -2,8 +2,14 @@ import Button from "./Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import WorkHistory from "./WorkHistory";
+import ExperienceInputs from "./ExperienceInputs";
+import { useState } from "react";
+
 import BackButtonArrow from "../buttons/BackButtonArrow";
 import Profile from "../component/Profile";
+
 
 type formType = {
   position: string;
@@ -14,21 +20,23 @@ type formType = {
 };
 
 const schema = yup.object({
-  position: yup.string().required("სავალდებულო ველი"),
-  employer: yup.string().required("სავალდებულო ველი"),
-  startNumber: yup.string().required("სავალდებულო ველი"),
-  endNumber: yup.string().required("სავალდებულო ველი"),
-  description: yup.string().required("სავალდებულო ველი"),
+  position: yup.string().min(2, "").required("სავალდებულო ველი"),
+  employer: yup.string().min(2, "").required("სავალდებულო ველი"),
+  startNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
+  endNumber: yup.string().min(2, "").required("სავალდებულო ველი"),
+  description: yup.string().min(2, "").required("სავალდებულო ველი"),
 });
 
 export default function EnterPersonalData() {
+  const [count, setCount] = useState(1);
+
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<formType>({
     resolver: yupResolver(schema),
   });
 
@@ -47,7 +55,9 @@ export default function EnterPersonalData() {
     <div className="flex">
       <div className="bg-gray-100">
         <div className="flex pl-12 pt-12 pr-32 ">
+
           <BackButtonArrow location="/privateInfo" />
+
           <div className="ml-16 w-[798px]">
             <div className=" flex justify-between border-b border-black">
               <span className="text-2xl	font-bold">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</span>
@@ -57,88 +67,42 @@ export default function EnterPersonalData() {
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
-              <p className="font-medium">თანამდებობა</p>
-              <input
-                type="text"
-                {...register("position")}
-                placeholder="დეველოპერი, დიზაინერი, ა.შ."
-                className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
-              />
-              {errors.position ? (
-                <p className="text-mediumRed">{errors.position.message}</p>
-              ) : null}
-              <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
-              <p className="font-medium mt-3">დამსაქმებელი</p>
-              <input
-                type="text"
-                {...register("employer")}
-                placeholder="დამსაქმებელი"
-                className="w-full px-4 py-[14px] mt-2 border outline-none rounded"
-              />
-              {errors.employer ? (
-                <p className="text-mediumRed">{errors.employer.message}</p>
-              ) : null}
-              <span className="text-sm font-light	mt-2">მინიმუმ 2 სიმბოლო</span>
-              <div className="mt-5 flex justify-between">
-                <div className="w-full">
-                  <p className="font-medium">დაწყების რიცხვი</p>
-                  <div className="flex justify-between">
-                    <div className="">
-                      <input
-                        type="date"
-                        {...register("startNumber")}
-                        placeholder="mm / dd / yyyy"
-                        className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
-                      />
-                      {errors.startNumber ? (
-                        <p className="text-mediumRed">
-                          {errors.startNumber.message}
-                        </p>
-                      ) : null}
-                    </div>
-                    <div className="">
-                      <input
-                        type="date"
-                        {...register("endNumber")}
-                        placeholder="mm / dd / yyyy"
-                        className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
-                      />
-                      {errors.endNumber ? (
-                        <p className="text-mediumRed">
-                          {errors.endNumber.message}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full mt-5">
-                <p className="font-medium">აღწერა</p>
-                <textarea
-                  placeholder="თქვენი თანამშრომლობა და ზოგადი აზრები"
-                  {...register("description")}
-                  className="w-full h-32 border mt-2 px-4 py-[14px] outline-none rounded resize-none"
-                ></textarea>
-                {errors.description ? (
-                  <p className="text-mediumRed">{errors.description.message}</p>
-                ) : null}
-              </div>
+              {[...Array(count)].map((_, index) => (
+                <ExperienceInputs
+                  key={index}
+                  register={register}
+                  errors={errors}
+                  positionInput={positionInput}
+                  employerInput={employerInput}
+                  startNumberInput={startNumberInput}
+                  endNumberInput={endNumberInput}
+                  descriptionInput={descriptionInput}
+                />
+              ))}
               <div className="mt-10">
-                <Button type="button" variant="secondary">
+
+                <Button
+                  count={count}
+                  setCount={setCount}
+                  type="button"
+                  variant="secondary"
+                >
+
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
-                  <Button
-                    location="/privateInfo"
-                    type="button"
-                    variant="outline"
-                    size="large"
-                  >
+
+                  <Button type="button" variant="outline" size="large">
                     ᲣᲙᲐᲜ
                   </Button>
-                  <Button variant="outline" size="large">
+                  <Button
+                    variant="outline"
+                    size="large"
+                    onClick={handleSubmit(onSubmit)}
+                  >
+
                     შემდეგი
                   </Button>
                 </div>
@@ -147,7 +111,15 @@ export default function EnterPersonalData() {
           </div>
         </div>
       </div>
-      <Profile />
+
+      <WorkHistory
+        positionInput={positionInput}
+        employerInput={employerInput}
+        startNumberInput={startNumberInput}
+        endNumberInput={endNumberInput}
+        descriptionInput={descriptionInput}
+      />
+
     </div>
   );
 }
