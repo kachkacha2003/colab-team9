@@ -1,15 +1,35 @@
-import Button from "../Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ExperienceInputs from "./ExperienceInputs";
 import { useContext, useEffect, useState } from "react";
-import BackButtonArrow from "../buttons/BackButtonArrow";
-import Profile from "../component/Profile";
+import BackButtonArrow from "../../buttons/BackButtonArrow";
+import Profile from "../../component/Profile";
 import { useLocation, useNavigate } from "react-router-dom";
-import { GlobalAPI } from "../logic/ContextAPI";
+import { GlobalAPI } from "../../logic/ContextAPI";
 
-// ზედა და ქვედა ნაწილი
+type ButtonProps = {
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  variant: string;
+  size?: string;
+  children: React.ReactNode;
+};
+
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  type = "button",
+  variant,
+  size,
+  children,
+}) => {
+  return (
+    <button onClick={onClick} type={type} className={`btn ${variant} ${size}`}>
+      {children}
+    </button>
+  );
+};
+
 type formType = {
   position: string;
   employer: string;
@@ -31,6 +51,8 @@ export default function EnterPersonalData() {
   const { state } = location;
   const navigate = useNavigate();
   const { setExperience } = useContext(GlobalAPI);
+  const [count, setCount] = useState(1);
+
   const {
     register,
     handleSubmit,
@@ -42,8 +64,8 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
-    setExperience(data);
-    navigate("/educationInfo");
+    setExperience([data]);
+    navigate("/education");
   };
 
   const positionInput = watch("position");
@@ -53,21 +75,11 @@ export default function EnterPersonalData() {
   const infoInput = watch("info");
 
   useEffect(() => {
-    if (positionInput) {
-      localStorage.setItem("position", positionInput);
-    }
-    if (employerInput) {
-      localStorage.setItem("employer", employerInput);
-    }
-    if (start_dateInput) {
-      localStorage.setItem("startNumber", start_dateInput);
-    }
-    if (end_dateInput) {
-      localStorage.setItem("endNumber", end_dateInput);
-    }
-    if (infoInput) {
-      localStorage.setItem("description", infoInput);
-    }
+    if (positionInput) localStorage.setItem("position", positionInput);
+    if (employerInput) localStorage.setItem("employer", employerInput);
+    if (start_dateInput) localStorage.setItem("startNumber", start_dateInput);
+    if (end_dateInput) localStorage.setItem("endNumber", end_dateInput);
+    if (infoInput) localStorage.setItem("description", infoInput);
   }, [positionInput, employerInput, start_dateInput, end_dateInput, infoInput]);
 
   return (
@@ -99,8 +111,7 @@ export default function EnterPersonalData() {
               ))}
               <div className="mt-10">
                 <Button
-                  count={count}
-                  setCount={setCount}
+                  onClick={() => setCount((prevCount) => prevCount + 1)}
                   type="button"
                   variant="secondary"
                 >
@@ -141,14 +152,6 @@ export default function EnterPersonalData() {
           number={state.number}
         />
       </div>
-
-      <WorkHistory
-        positionInput={positionInput}
-        employerInput={employerInput}
-        start_dateInput={start_dateInput}
-        end_dateInput={end_dateInput}
-        infoInput={infoInput}
-      />
     </div>
   );
 }
