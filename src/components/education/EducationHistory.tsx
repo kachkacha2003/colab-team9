@@ -5,7 +5,6 @@ type historyProps = {
   infoInput: string;
 };
 
-//მარჯვენა მხარე
 export default function EducationHistory({
   educationInput,
   degreeInput,

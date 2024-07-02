@@ -5,7 +5,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   size?: "small" | "medium" | "large";
   isRound?: boolean;
-  location: string;
+  location?: string;
+  count?: number;
+  setCount?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   size = "medium",
   className = "",
   isRound = false,
+  onClick,
   ...props
 }) => {
   const baseStyle =
@@ -36,10 +39,18 @@ const Button: React.FC<ButtonProps> = ({
 
   const classes = `${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`;
 
+  if (location) {
+    return (
+      <Link to={location} className={classes} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Link to={location} className={classes} {...props}>
+    <button className={classes} onClick={onClick} {...props}>
       {children}
-    </Link>
+    </button>
   );
 };
 

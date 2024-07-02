@@ -32,7 +32,7 @@ function Profile({
 }: TProfile) {
   return (
     <div className="ml-[80px] relative min-w-[622px] h-screen ">
-      <div className="flex ">
+      <div className="flex pb-4">
         <div className="w-[400px] mt-[68px] ">
           <h1 className="text-mediumRed text-4xl font-bold flex 	">
             {name
@@ -89,14 +89,16 @@ function Profile({
         <div className="mt-12 ml-4">
           {localStorage.getItem("files") && (
             <img
-              className="rounded-full w-[250px] h-[250px] "
-              src={
-                files
-                  ? files
-                  : localStorage.getItem("files")
-                  ? localStorage.getItem("files")
-                  : null
-              }
+              className="rounded-full w-[250px] h-[250px] object-cover"
+              style={{
+                width: "250px",
+                height: "250px",
+                minWidth: "250px",
+                minHeight: "250px",
+                maxWidth: "250px",
+                maxHeight: "250px",
+              }}
+              src={files || localStorage.getItem("files") || undefined}
               alt="your image"
             />
           )}

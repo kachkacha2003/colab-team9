@@ -56,7 +56,7 @@ export default function EducationMain() {
           <BackButtonArrow location="/privateInfo" />
 
           <div className="ml-16 w-[798px]">
-            <div className=" flex justify-between border-b border-black">
+            <div className=" flex justify-between border-b border-black pb-3">
               <span className="text-2xl	font-bold">ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</span>
               <span className="text-xl">3/3</span>
             </div>
@@ -72,6 +72,7 @@ export default function EducationMain() {
                   watch={watch}
                 />
               ))}
+              {/* ვერ გავიგე რატო ამ მითვება ამ ღილაკებს Button ფაილიდან კლასები */}
               <div className="mt-10">
                 <Button
                   count={count}

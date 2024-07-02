@@ -67,36 +67,32 @@ export default function EducationInputs({
           <select
             title="title"
             {...register("degree")}
-            className="w-[370px] px-4 py-[14px] mt-2 border outline-none rounded"
+            className={`w-[370px] px-4 py-[14px] mt-2 border outline-none rounded ${
+              errors.degree
+                ? "border-red-500"
+                : degree && degree !== ""
+                ? "border-green-500"
+                : "border-gray-300"
+            }`}
           >
-            <option selected disabled>
-              აირჩიეთ ხარისხი
+            <option value="">აირჩიეთ ხარისხი</option>
+            <option value="საშუალო სკოლის დიპლომი">
+              საშუალო სკოლის დიპლომი
             </option>
-            <option>საშუალო სკოლის დიპლომი</option>
-            <option>ზოგადსაგანმანათლებლო დიპლომი</option>
-            <option>ბაკალავრი</option>
-            <option>მაგისტრი</option>
-            <option>დოქტორი</option>
-            <option>ასოცირებული ხარისხი</option>
-            <option>სტუდენტი</option>
-            <option>კოლეჯი (ხარისხის გარეშე)</option>
-            <option>სხვა</option>
+            <option value="ზოგადსაგანმანათლებლო დიპლომი">
+              ზოგადსაგანმანათლებლო დიპლომი
+            </option>
+            <option value="ბაკალავრი">ბაკალავრი</option>
+            <option value="მაგისტრი">მაგისტრი</option>
+            <option value="დოქტორი">დოქტორი</option>
+            <option value="ასოცირებული ხარისხი">ასოცირებული ხარისხი</option>
+            <option value="სტუდენტი">სტუდენტი</option>
+            <option value="კოლეჯი (ხარისხის გარეშე)">
+              კოლეჯი (ხარისხის გარეშე)
+            </option>
+            <option value="სხვა">სხვა</option>
           </select>
-          {errors.degree && (
-            <img
-              src="/images/error-icon.png"
-              alt="Error"
-              className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
-            />
-          )}
-          {degree && degree.length >= 2 && !errors.degree && (
-            <img
-              src="/images/success-icon.png"
-              alt="Success"
-              className="absolute right-4 transform top-6 w-6 h-6"
-            />
-          )}
-          <span className="text-sm font-light mt-2">მინიმუმ 2 სიმბოლო</span>
+          <span className="text-sm font-light mt-2">აირჩიეთ ხარისხი</span>
         </div>
         {errors.degree ? (
           <p className="text-mediumRed">{errors.degree.message}</p>
@@ -114,20 +110,6 @@ export default function EducationInputs({
                   : "border-gray-300"
               }`}
             />
-            {errors.end_date && (
-              <img
-                src="/images/error-icon.png"
-                alt="Error"
-                className="absolute top-9 -right-8 transform -translate-y-1/2 w-6 h-6"
-              />
-            )}
-            {end_date && !errors.end_date && (
-              <img
-                src="/images/success-icon.png"
-                alt="Success"
-                className="absolute right-4 transform top-6 w-6 h-6"
-              />
-            )}
           </div>
           {errors.end_date ? (
             <p className="text-mediumRed">{errors.end_date.message}</p>
