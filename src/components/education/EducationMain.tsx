@@ -4,12 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import EducationHistory from "../education/EducationHistory";
-import EducationInputs from "../education/EducationInputs";
+
 import { useState } from "react";
 
 import BackButtonArrow from "../../buttons/BackButtonArrow";
 import Popup from "../Popup";
-// import Profile from "../../component/Profile";
 
 // ზედა და ქვედა ნაწილი
 type formType = {
@@ -18,7 +17,14 @@ type formType = {
   end_date: string;
   info: string;
 };
-
+type EducationInputsProps = {
+  education: string;
+  degree: string;
+  end_date: string;
+  info: string;
+  register: UseFormRegister<FormData>;
+  errors: FieldErrors<FormData>;
+};
 const schema = yup.object({
   education: yup.string().min(2, "").required("სავალდებულო ველი"),
   degree: yup.string().min(2, "").required("სავალდებულო ველი"),
@@ -28,14 +34,13 @@ const schema = yup.object({
 
 export default function EducationMain() {
   const [count, setCount] = useState(1);
-
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm<formType>({
+  } = useForm<EducationInputsProps>({
     resolver: yupResolver(schema),
   });
 
@@ -44,10 +49,10 @@ export default function EducationMain() {
     reset();
   };
 
-  const educationInput = watch("education");
-  const degreeInput = watch("degree");
-  const end_dateInput = watch("end_date");
-  const infoInput = watch("info");
+  const education = watch("education");
+  const degree = watch("degree");
+  const end_date = watch("end_date");
+  const info = watch("info");
 
   return (
     <div className="flex">
@@ -64,14 +69,14 @@ export default function EducationMain() {
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
-              {[...Array(count)].map((_, index) => (
-                <EducationInputs
-                  key={index}
-                  register={register}
-                  errors={errors}
-                  watch={watch}
-                />
-              ))}
+              <EducationInputs
+                education={education}
+                degree={degree}
+                end_date={end_date}
+                info={info}
+                register={register}
+                errors={errors}
+              />
               <div className="mt-10">
                 <Button
                   count={count}

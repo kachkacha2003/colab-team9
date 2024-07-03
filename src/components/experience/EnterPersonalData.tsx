@@ -3,11 +3,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ExperienceInputs from "./ExperienceInputs";
-import { useContext, useEffect, useState } from "react";
-import BackButtonArrow from "../buttons/BackButtonArrow";
-import Profile from "../component/Profile";
+import { useContext, useEffect } from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
-import { GlobalAPI } from "../logic/ContextAPI";
+
+import BackButtonArrow from "../../buttons/BackButtonArrow";
+import Profile from "../../component/Profile";
+import { GlobalAPI } from "../../logic/ContextAPI";
+import WorkHistory from "./WorkHistory";
 
 // ზედა და ქვედა ნაწილი
 type formType = {
@@ -85,25 +88,17 @@ export default function EnterPersonalData() {
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
-              {[...Array(count)].map((_, index) => (
-                <ExperienceInputs
-                  key={index}
-                  register={register}
-                  errors={errors}
-                  positionInput={positionInput}
-                  employerInput={employerInput}
-                  start_dateInput={start_dateInput}
-                  end_dateInput={end_dateInput}
-                  infoInput={infoInput}
-                />
-              ))}
+              <ExperienceInputs
+                register={register}
+                errors={errors}
+                positionInput={positionInput}
+                employerInput={employerInput}
+                start_dateInput={start_dateInput}
+                end_dateInput={end_dateInput}
+                infoInput={infoInput}
+              />
               <div className="mt-10">
-                <Button
-                  count={count}
-                  setCount={setCount}
-                  type="button"
-                  variant="secondary"
-                >
+                <Button type="button" variant="secondary">
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
@@ -141,14 +136,6 @@ export default function EnterPersonalData() {
           number={state.number}
         />
       </div>
-
-      <WorkHistory
-        positionInput={positionInput}
-        employerInput={employerInput}
-        start_dateInput={start_dateInput}
-        end_dateInput={end_dateInput}
-        infoInput={infoInput}
-      />
     </div>
   );
 }

@@ -1,30 +1,28 @@
 type historyProps = {
   positionInput: string;
   employerInput: string;
-  start_dateInput: string;
-  end_dateInput: string;
-  infoInput: string;
+  start_date: string;
+  endNumberInput: string;
+  descriptionInput: string;
 };
-
-//მარჯვენა მხარე
 
 export default function WorkHistory({
   positionInput,
   employerInput,
-  start_dateInput,
-  end_dateInput,
-  infoInput,
+  start_date,
+  endNumberInput,
+  descriptionInput,
 }: historyProps) {
   return (
     <div className="mt-5">
       {positionInput ||
       employerInput ||
-      start_dateInput ||
-      end_dateInput ||
-      infoInput ||
+      start_date ||
+      endNumberInput ||
+      descriptionInput ||
       localStorage.getItem("position") ||
       localStorage.getItem("employer") ||
-      localStorage.getItem("startNumber") ||
+      localStorage.getItem("start_date") ||
       localStorage.getItem("endNumber") ||
       localStorage.getItem("description") ? (
         <h2 className="font-bold text-lg text-mediumRed">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
@@ -45,20 +43,20 @@ export default function WorkHistory({
       </div>
       <div className="flex mt-2">
         <p className="mr-2 text-lightGray font-normal">
-          {start_dateInput
-            ? start_dateInput
+          {start_date
+            ? start_date
             : localStorage.getItem("startNumber")
             ? localStorage.getItem("startNumber")
             : null}
         </p>
-        {(start_dateInput && end_dateInput) ||
+        {(start_date && endNumberInput) ||
         (localStorage.getItem("startNumber") &&
           localStorage.getItem("endNumber")) ? (
           <p className="text-lightGray font-normal"> - </p>
         ) : null}
         <p className="ml-2 text-lightGray font-normal">
-          {end_dateInput
-            ? end_dateInput
+          {endNumberInput
+            ? endNumberInput
             : localStorage.getItem("endNumber")
             ? localStorage.getItem("endNumber")
             : null}
@@ -66,8 +64,8 @@ export default function WorkHistory({
       </div>
       <p className="mt-4 w-[662px] pb-8 ">
         {" "}
-        {infoInput
-          ? infoInput
+        {descriptionInput
+          ? descriptionInput
           : localStorage.getItem("description")
           ? localStorage.getItem("description")
           : null}

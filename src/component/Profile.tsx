@@ -1,7 +1,7 @@
 import mail from "/images/email.svg";
 import telphone from "/images/phone.svg";
 import logo from "/images/LOGO-12.png";
-import WorkHistory from "../components/WorkHistory";
+import WorkHistory from "../components/experience/WorkHistory";
 
 type TProfile = {
   name: string;
