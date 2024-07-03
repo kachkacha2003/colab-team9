@@ -34,7 +34,7 @@ export default function EnterPersonalData() {
   const navigate = useNavigate();
   const { setExperience } = useContext(GlobalAPI);
   const [count, setCount] = useState(1);
-
+  console.log(state);
   const {
     register,
     handleSubmit,
