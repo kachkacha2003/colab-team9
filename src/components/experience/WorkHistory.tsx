@@ -1,4 +1,4 @@
-type historyProps = {
+type HistoryProps = {
   positionInput: string;
   employerInput: string;
   start_dateInput: string;
@@ -7,14 +7,13 @@ type historyProps = {
 };
 
 //მარჯვენა მხარე
-
 export default function WorkHistory({
   positionInput,
   employerInput,
   start_dateInput,
   end_dateInput,
   infoInput,
-}: historyProps) {
+}: HistoryProps) {
   return (
     <div className="mt-5">
       {positionInput ||
@@ -31,16 +30,12 @@ export default function WorkHistory({
       ) : null}
       <div className="mt-4 ">
         <span className=" font-medium	">
-          {positionInput}
-          {!positionInput ? null : ","}
+          {positionInput || localStorage.getItem("position")}
+          {positionInput || localStorage.getItem("position") ? "," : ""}
         </span>
         <span className="ml-2 font-medium">
           {" "}
-          {employerInput
-            ? employerInput
-            : localStorage.getItem("employer")
-            ? localStorage.getItem("employer")
-            : null}
+          {employerInput || localStorage.getItem("employer")}
         </span>
       </div>
       <div className="flex mt-2">

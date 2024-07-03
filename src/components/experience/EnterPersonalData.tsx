@@ -1,18 +1,17 @@
-import Button from "../Button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ExperienceInputs from "./ExperienceInputs";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
 import BackButtonArrow from "../../buttons/BackButtonArrow";
 import Profile from "../../component/Profile";
 import { GlobalAPI } from "../../logic/ContextAPI";
-import WorkHistory from "./WorkHistory";
+import Button from "../Button";
+import NextButton from "../../buttons/NextButton";
 
-// ზედა და ქვედა ნაწილი
 type formType = {
   position: string;
   employer: string;
@@ -34,6 +33,8 @@ export default function EnterPersonalData() {
   const { state } = location;
   const navigate = useNavigate();
   const { setExperience } = useContext(GlobalAPI);
+  const [count, setCount] = useState(1);
+
   const {
     register,
     handleSubmit,
@@ -56,21 +57,11 @@ export default function EnterPersonalData() {
   const infoInput = watch("info");
 
   useEffect(() => {
-    if (positionInput) {
-      localStorage.setItem("position", positionInput);
-    }
-    if (employerInput) {
-      localStorage.setItem("employer", employerInput);
-    }
-    if (start_dateInput) {
-      localStorage.setItem("startNumber", start_dateInput);
-    }
-    if (end_dateInput) {
-      localStorage.setItem("endNumber", end_dateInput);
-    }
-    if (infoInput) {
-      localStorage.setItem("description", infoInput);
-    }
+    if (positionInput) localStorage.setItem("position", positionInput);
+    if (employerInput) localStorage.setItem("employer", employerInput);
+    if (start_dateInput) localStorage.setItem("startNumber", start_dateInput);
+    if (end_dateInput) localStorage.setItem("endNumber", end_dateInput);
+    if (infoInput) localStorage.setItem("description", infoInput);
   }, [positionInput, employerInput, start_dateInput, end_dateInput, infoInput]);
 
   return (
@@ -104,16 +95,15 @@ export default function EnterPersonalData() {
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
-                  <Button type="button" variant="outline" size="large">
-                    ᲣᲙᲐᲜ
-                  </Button>
                   <Button
+                    location={"/privateInfo"}
+                    type="button"
                     variant="outline"
                     size="large"
-                    onClick={handleSubmit(onSubmit)}
                   >
-                    შემდეგი
+                    ᲣᲙᲐᲜ
                   </Button>
+                  <NextButton />
                 </div>
               </div>
             </form>
