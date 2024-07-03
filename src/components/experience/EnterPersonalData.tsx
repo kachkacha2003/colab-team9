@@ -3,32 +3,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ExperienceInputs from "./ExperienceInputs";
 import { useContext, useEffect, useState } from "react";
+
+import { useLocation, useNavigate } from "react-router-dom";
+
 import BackButtonArrow from "../../buttons/BackButtonArrow";
 import Profile from "../../component/Profile";
-import { useLocation, useNavigate } from "react-router-dom";
 import { GlobalAPI } from "../../logic/ContextAPI";
-
-type ButtonProps = {
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
-  variant: string;
-  size?: string;
-  children: React.ReactNode;
-};
-
-const Button: React.FC<ButtonProps> = ({
-  onClick,
-  type = "button",
-  variant,
-  size,
-  children,
-}) => {
-  return (
-    <button onClick={onClick} type={type} className={`btn ${variant} ${size}`}>
-      {children}
-    </button>
-  );
-};
+import Button from "../Button";
+import NextButton from "../../buttons/NextButton";
 
 type formType = {
   position: string;
@@ -64,8 +46,8 @@ export default function EnterPersonalData() {
 
   const onSubmit: SubmitHandler<formType> = (data) => {
     console.log(data);
-    setExperience([data]);
-    navigate("/education");
+    setExperience(data);
+    navigate("/educationInfo");
   };
 
   const positionInput = watch("position");
@@ -97,39 +79,31 @@ export default function EnterPersonalData() {
               onSubmit={handleSubmit(onSubmit)}
               className="mt-[70px] border-b border-mediumGray pb-12"
             >
-              {[...Array(count)].map((_, index) => (
-                <ExperienceInputs
-                  key={index}
-                  register={register}
-                  errors={errors}
-                  positionInput={positionInput}
-                  employerInput={employerInput}
-                  start_dateInput={start_dateInput}
-                  end_dateInput={end_dateInput}
-                  infoInput={infoInput}
-                />
-              ))}
+              <ExperienceInputs
+                register={register}
+                errors={errors}
+                positionInput={positionInput}
+                employerInput={employerInput}
+                start_dateInput={start_dateInput}
+                end_dateInput={end_dateInput}
+                infoInput={infoInput}
+              />
               <div className="mt-10">
-                <Button
-                  onClick={() => setCount((prevCount) => prevCount + 1)}
-                  type="button"
-                  variant="secondary"
-                >
+                <Button type="button" variant="secondary">
                   მეტი გამოცდილების დამატება
                 </Button>
               </div>
               <div className="">
                 <div className="mt-[115px] flex justify-between pb-[65px]">
-                  <Button type="button" variant="outline" size="large">
-                    ᲣᲙᲐᲜ
-                  </Button>
                   <Button
+                    location={"/privateInfo"}
+                    type="button"
                     variant="outline"
                     size="large"
-                    onClick={handleSubmit(onSubmit)}
                   >
-                    შემდეგი
+                    ᲣᲙᲐᲜ
                   </Button>
+                  <NextButton />
                 </div>
               </div>
             </form>

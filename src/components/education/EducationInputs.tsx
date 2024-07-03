@@ -1,28 +1,24 @@
 import { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
-
-type InputType = {
+type FormData = {
   education: string;
   degree: string;
   end_date: string;
   info: string;
 };
 
-interface ExperienceInputsProps {
-  register: UseFormRegister<InputType>;
-  errors: FieldErrors<InputType>;
-  watch: UseFormWatch<InputType>;
-}
+type EducationInputsProps = {
+  register: UseFormRegister<FormData>;
+  errors: FieldErrors<FormData>;
+};
 
 export default function EducationInputs({
   register,
   errors,
-  watch,
-}: ExperienceInputsProps) {
-  const education = watch("education");
-  const degree = watch("degree");
-  const end_date = watch("end_date");
-  const info = watch("info");
-
+  education,
+  degree,
+  end_date,
+  info,
+}: EducationInputsProps) {
   return (
     <div className="border-b border-lightGray pb-11">
       <p className="font-medium">სასწავლებელი</p>
