@@ -14,7 +14,7 @@ export default function EducationHistory({
 }: historyProps) {
   return (
     <div className="mt-5">
-      <h2 className="font-bold text-lg text-mediumRed">ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
+      <h2 className="font-bold text-lg text-mediumRed">განათლება</h2>
       <span className="mt-4 font-medium	">
         {educationInput}
         {!educationInput ? null : ","}

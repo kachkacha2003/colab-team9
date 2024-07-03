@@ -2,6 +2,7 @@ import mail from "/images/email.svg";
 import telphone from "/images/phone.svg";
 import logo from "/images/LOGO-12.png";
 import WorkHistory from "../components/experience/WorkHistory";
+import EducationHistory from "../components/education/EducationHistory";
 
 type TProfile = {
   name: string;
@@ -15,9 +16,17 @@ type TProfile = {
   start_dateInput: string;
   end_dateInput: string;
   infoInput: string;
+  education: string;
+  degree: string;
+  end_date: string;
+  info: string;
 };
 
 function Profile({
+  info,
+  end_date,
+  education,
+  degree,
   name,
   last_name,
   number,
@@ -117,6 +126,8 @@ function Profile({
         end_dateInput={end_dateInput}
         infoInput={infoInput}
       />
+      <EducationHistory />
+
       <img className="absolute bottom-[20px]" src={logo} alt="Logo" />
     </div>
   );

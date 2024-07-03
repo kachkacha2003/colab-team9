@@ -1,14 +1,17 @@
 import Button from "../Button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import Profile from "../../component/Profile";
+import {
+  useForm,
+  SubmitHandler,
+  UseFormRegister,
+  FieldErrors,
+} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import EducationHistory from "../education/EducationHistory";
-
 import { useState } from "react";
-
 import BackButtonArrow from "../../buttons/BackButtonArrow";
-import Popup from "../Popup";
+import EducationInputs from "./EducationInputs";
 
 // ზედა და ქვედა ნაწილი
 type formType = {
@@ -102,16 +105,14 @@ export default function EducationMain() {
                 </div>
               </div>
             </form>
-            <Popup />
           </div>
         </div>
       </div>
-
-      <EducationHistory
-        educationInput={educationInput}
-        degreeInput={degreeInput}
-        end_dateInput={end_dateInput}
-        infoInput={infoInput}
+      <Profile
+        education={education}
+        degree={degree}
+        end_date={end_date}
+        info={info}
       />
     </div>
   );

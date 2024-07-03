@@ -1,4 +1,5 @@
 import { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
+
 type FormData = {
   education: string;
   degree: string;
@@ -78,6 +79,7 @@ export default function EducationInputs({
             <option>კოლეჯი (ხარისხის გარეშე)</option>
             <option>სხვა</option>
           </select>
+
           {errors.degree && (
             <img
               src="/images/error-icon.png"
